@@ -1,0 +1,18 @@
+real-time,level,cmdb_id,failure_type,failure_description,detail
+13:21:00,service,cartservice,2,istio�����ӳ�,4000ms
+13:44:00,pod,currencyservice-588fc9584d-cl9dm,5,k8s�������綪��,100%����
+14:14:00,service,emailservice,2,istio�����ӳ�,4000ms
+14:49:00,pod,frontend-875b86bb8-lq7z8,5,k8s�������綪��,100%����
+15:09:00,pod,paymentservice-6879f6c8c4-8pbjc,6,k8s����������ֹ,contaienr pause
+15:28:00,service,recommendationservice,2,istio�����ӳ�,4000ms
+15:49:00,pod,shippingservice-589dc45c5d-sfzzg,3,k8s����cpu����,100%
+16:27:00,pod,shippingservice-589dc45c5d-sfzzg,3,k8s����cpu����,100%
+16:43:00,pod,recommendationservice-689548cfbd-ml8h2,6,k8s����������ֹ,contaienr pause
+17:47:00,service,paymentservice,5,k8s�������綪��,100%����
+18:07:00,pod,emailservice-8848674-b7vr4,5,k8s�������綪��,100%����
+18:21:00,pod,emailservice-8848674-b7vr4,4,k8s�����ڴ渺��,100%
+19:04:00,pod,currencyservice-588fc9584d-cl9dm,5,k8s�������綪��,100%����
+19:32:00,pod,currencyservice-588fc9584d-cl9dm,5,k8s�������綪��,100%����
+19:50:00,pod,checkoutservice-7d8cb45794-vfnmh,4,k8s�����ڴ渺��,100%
+20:41:00,pod,cartservice-75d494679c-vfldf,4,k8s�����ڴ渺��,100%
+21:04:00,pod,cartservice-75d494679c-qdl5c,5,k8s�������綪��,100%����

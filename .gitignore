@@ -1,0 +1,5 @@
+wandb/*
+**/*.svg
+**/__pycache__/*
+.DS_Store
+.vscode/*

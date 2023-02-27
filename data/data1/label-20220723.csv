@@ -1,0 +1,21 @@
+real-time,level,cmdb_id,failure_type,failure_description,detail
+10:13:00,service,cartservice,2,istio�����ӳ�,4000ms
+10:36:00,pod,currencyservice-588fc9584d-c9hrl,5,k8s�������綪��,100%����
+11:06:00,service,emailservice,2,istio�����ӳ�,4000ms
+11:41:00,pod,frontend-875b86bb8-lq7z8,5,k8s�������綪��,100%����
+12:01:00,pod,paymentservice-6879f6c8c4-8pbjc,6,k8s����������ֹ,contaienr pause
+12:20:00,service,recommendationservice,2,istio�����ӳ�,4000ms
+12:41:00,pod,shippingservice-589dc45c5d-h7pnk,3,k8s����cpu����,100%
+13:01:00,pod,shippingservice-589dc45c5d-h7pnk,5,k8s�������綪��,100%����
+13:19:00,pod,shippingservice-589dc45c5d-h7pnk,3,k8s����cpu����,100%
+13:35:00,pod,recommendationservice-689548cfbd-ml8h2,6,k8s����������ֹ,contaienr pause
+14:06:00,pod,productcatalogservice-5ff5f57dc8-8z7xf,3,k8s����cpu����,100%
+14:22:00,service,paymentservice,2,istio�����ӳ�,4000ms
+14:39:00,service,paymentservice,5,k8s�������綪��,100%����
+14:59:00,pod,emailservice-8848674-b7vr4,5,k8s�������綪��,100%����
+15:13:00,pod,emailservice-8848674-b7vr4,4,k8s�����ڴ渺��,100%
+16:24:00,pod,currencyservice-588fc9584d-cl9dm,5,k8s�������綪��,100%����
+16:42:00,pod,checkoutservice-7d8cb45794-hc2rj,4,k8s�����ڴ渺��,100%
+16:56:00,pod,currencyservice-588fc9584d-cl9dm,5,k8s�������綪��,100%����
+17:33:00,pod,cartservice-75d494679c-vfldf,4,k8s�����ڴ渺��,100%
+18:00:00,pod,cartservice-75d494679c-vfldf,5,k8s�������綪��,100%����
