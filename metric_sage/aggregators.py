@@ -4,7 +4,7 @@ from torch.autograd import Variable
 
 import random
 import numpy as np
-from graphsage_metric.index_map import index_map
+from metric_sage.index_map import index_map
 
 """
 Set of modules for aggregating embeddings of neighbors.

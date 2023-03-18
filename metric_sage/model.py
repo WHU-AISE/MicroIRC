@@ -14,11 +14,11 @@ import random
 from sklearn.metrics import f1_score
 from collections import defaultdict
 
-from graphsage_metric.encoders import Encoder
-from graphsage_metric.aggregators import MeanAggregator
+from metric_sage.encoders import Encoder
+from metric_sage.aggregators import MeanAggregator
 import pandas as pd
-from graphsage_metric.index_map import IndexMap
-from graphsage_metric.index_map import index_map
+from metric_sage.index_map import IndexMap
+from metric_sage.index_map import index_map
 
 import wandb
 

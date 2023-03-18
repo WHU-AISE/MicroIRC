@@ -16,11 +16,11 @@ from sklearn.cluster import Birch
 from sklearn import base, preprocessing
 
 from utils.PageRank import pageRank
-from graphsage_metric.model import run_RCA
-from graphsage_metric.time import Time
+from metric_sage.model import run_RCA
+from metric_sage.time import Time
 
 from util import formalize
-from graphsage_metric.model import SupervisedGraphSage
+from metric_sage.model import SupervisedGraphSage
 
 import warnings
 warnings.filterwarnings('ignore')
