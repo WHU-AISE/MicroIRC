@@ -1,6 +1,10 @@
 # MicroIRC
 
-## Folder
+## MicroIRC: Instance-level Root Cause Localization for Microservice Systems
+
+MicroIRC is an instance-level root cause localization method for microservice systems
+
+## Folder Introduction
 
 ### data
 
@@ -18,7 +22,21 @@ locust script to send request
 
 code of MetricSage GCN
 
-## Run
+## Getting Started
+
+### Clone the Repo
+
+```shell
+git clone https://github.com/WHU-AISE/MicroIRC.git
+```
+
+### Install Dependencies
+
+```shell
+pip install -r requirements.txt
+```
+
+### Run
 
 ```shell
 python MicroIRC.py
