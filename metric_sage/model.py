@@ -64,34 +64,12 @@ def load_RCA(node_num, feat_num, df, time_data, time_list):
                 count += 1
 
     adj_lists = defaultdict(set)
-
-    # call_file_name = '20221020' + '/' + 'call.csv'
-    # call_data = pd.read_csv(call_file_name)
-    # call_set = []
-    # for head in call_data.columns:
-    #     if 'timestamp' in head: continue
-    #     call_set.append(head[:head.find('&')])
-
-    # 构建图网络边
-    # for row in call_set:
-    #     split = row.split('_')
-    #     source = split[0]
-    #     destination = split[1]
-    #     # if 'unknown' 
-    #     adj_lists[source].add(destination)
     label_map = defaultdict(set)
     for i, label in enumerate(labels):
         label_map[label[0]].add(i)
     for s in label_map:
         for i in range(len(label_map[s])):
             for j in range(len(label_map[s])):
-            # 不知为何进行单向时序连接时，loss会得出nan
-            # for j in range(i):
-                # rand1 = list(label_map[random.randint(0, 19)])
-                # rand2 = list(label_map[random.randint(0, 19)])
-                # len1 = len(rand1)
-                # len2 = len(rand2)
-                # adj_lists[rand1[random.randint(0, len1 - 1)]].add(rand2[random.randint(0, len2 - 1)])
                 adj_lists[list(label_map[s])[i]].add(list(label_map[s])[j])
     
     return feat_data, labels, adj_lists, index_map_list
@@ -103,8 +81,6 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_
     feat_data, labels, adj_lists, index_map_list = load_RCA(node_num, feat_num, df, time_data, time_list)
 
     features = nn.Embedding(node_num, feat_num)
-    # features.weight = nn.Parameter(torch.zeros(4822, 146), requires_grad=False)
-    # features.cuda()
 
     agg1 = MeanAggregator(features, metric, index_map_list, cuda=True)
     enc1 = Encoder(features, node_num, feat_num, adj_lists, agg1, metric, index_map_list, gcn=True, cuda=False)
@@ -126,7 +102,7 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_
     test = rand_indices[:1600]
     val = rand_indices[1600:3200]
     train = list(rand_indices[3200:])
-    # 模型名称自定义
+    # model diy name
     # suffix_diy = "data_modify"
     suffix_diy = ""
     suffix = folder + "_" + str(class_num) + "_" + str(num_sample) + "_" + str(batch_size) + ("" if suffix_diy == "" else "_" + suffix_diy)
@@ -144,7 +120,6 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_
             random.shuffle(train)
             start_time = time.time()
             optimizer.zero_grad()
-            # todo loss不变
             loss = graphsage.loss(batch_nodes, metric.loc[index_map(batch_nodes, index_map_list)],
                     Variable(torch.LongTensor(labels[np.array(batch_nodes)])))
             loss.backward()
@@ -165,9 +140,6 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_
     else:
         trained_model = SupervisedGraphSage(class_num, enc2)                                                    
         trained_model.load_state_dict(torch.load("./model/model_parameters_" + suffix + ".pkl"))
-        # 是否是训练模型的数据集
-        # is_train_data = False
-        # 第三个参数为True表示metric
         val_output = trained_model.forward(val, metric.loc[index_map(val, index_map_list)], True)
         print("Validation F1:", f1_score(labels[val], val_output.data.numpy().argmax(axis=1), average="micro"))
         return trained_model

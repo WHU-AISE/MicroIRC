@@ -93,7 +93,6 @@ class MeanAggregator(nn.Module):
                 if is_node_train_index:
                     embed_matrix = torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).view(len(true_unique_nodes_list), 146)
                 else:
-                    # TODO 新指标需要传入neighbor metric,无法从self.metric获取
                     embed_matrix = torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).view(len(true_unique_nodes_list), 146)
         to_feats = mask.mm(embed_matrix)
         return to_feats

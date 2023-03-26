@@ -46,11 +46,10 @@ class Encoder(nn.Module):
                 neigh_nodes.append(self.adj_lists[int(node)])
             else:
                 neigh_nodes.append({i for i in range(int(node) - 60, int(node) + 60)})
-        # metric传neigh_nodes区间内的
+        # metric within neigh_nodes
         neigh_feats = self.aggregator.forward(nodes, neigh_nodes, metric,
                 self.num_sample, is_node_train_index)
         try:
-            # TODO metric问题
             if not self.gcn:
                 if self.cuda:
                     self_feats = self.features(torch.LongTensor(nodes), metric).cuda()
