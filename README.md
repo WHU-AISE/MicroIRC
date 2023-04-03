@@ -24,6 +24,12 @@ code of MetricSage GCN
 
 ## Getting Started
 
+### Environment
+
+```
+python 3.10
+```
+
 ### Clone the Repo
 
 ```shell

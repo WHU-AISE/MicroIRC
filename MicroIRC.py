@@ -598,7 +598,7 @@ def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map
             for i in svc_instances_map[root_cause]: root_cause_candidate_list.append(i)
     return root_cause_candidate_list
 
-def trainGraphSage(time_list, folder, class_num, train = False):
+def trainGraphSage(time_list, folder, class_num, label_file ,train = False):
     # build svc call
     call_file_name = folder + '/' + 'call.csv'
     call_data = pd.read_csv(call_file_name)
@@ -624,7 +624,7 @@ def trainGraphSage(time_list, folder, class_num, train = False):
         X = normalized_x.reshape(-1, 1)
         data[i] = X
 
-    return run_RCA(node_num, 146, data, time_data, time_list, data, folder, class_num, train)
+    return run_RCA(node_num, 146, data, time_data, time_list, data, folder, class_num, label_file ,train)
 
 def rank(classification_count, root_cause_list, label_data):
     rank_list = {}
@@ -649,8 +649,9 @@ def rank(classification_count, root_cause_list, label_data):
 
 if __name__ == '__main__':
 
-    folder_list = ['data/data1', 'data/data2']
+    folder_list = ['data/data1/1', 'data/data1/2']
     label_list = ['2022-7-22 ', '2022-7-23 ']
+    label_file_list = ['20220722', '20220723']
     i_t_pr_1 = 0; i_t_pr_3 = 0; i_t_pr_5 = 0; i_t_pr_10 = 0; i_t_avg_1 = 0; i_t_avg_3 = 0; i_t_avg_5 = 0; i_t_avg_10 = 0
     s_t_pr_1 = 0; s_t_pr_3 = 0; s_t_pr_5 = 0; s_t_pr_10 = 0; s_t_avg_1 = 0; s_t_avg_3 = 0; s_t_avg_5 = 0; s_t_avg_10 = 0
 
@@ -668,7 +669,7 @@ if __name__ == '__main__':
         instance_tolerant = 0.01
         service_tolerant = 0.03
         train = False
-        candidate_count = 10
+        candidate_count = 20
         class_num = 20
 
         # time_data
@@ -676,7 +677,7 @@ if __name__ == '__main__':
         time_data = metric_source_data.iloc[:,0:1]
 
         # read root_causes
-        label_file_name = folder + '/' + 'label-' + folder + '.csv'
+        label_file_name = folder + '/' + 'label-' + label_file_list[i] + '.csv'
         label_data = pd.read_csv(label_file_name, encoding='utf-8')
         root_causes = label_data['cmdb_id']
 
@@ -694,7 +695,7 @@ if __name__ == '__main__':
             time_list.append(t)
 
         # train GNN
-        graphsage = trainGraphSage(time_list, folder, class_num, train)
+        graphsage = trainGraphSage(time_list, folder, class_num, label_file_list[i], train)
 
         # build svc call
         call_file_name = folder + '/' + 'call.csv'

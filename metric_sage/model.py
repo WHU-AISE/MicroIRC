@@ -74,7 +74,7 @@ def load_RCA(node_num, feat_num, df, time_data, time_list):
     
     return feat_data, labels, adj_lists, index_map_list
 
-def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_num, train_=False):
+def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_num, label_file, train_=False):
     np.random.seed(1)
     random.seed(1)
     num_nodes = node_num
@@ -105,7 +105,7 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, folder, class_
     # model diy name
     # suffix_diy = "data_modify"
     suffix_diy = ""
-    suffix = folder + "_" + str(class_num) + "_" + str(num_sample) + "_" + str(batch_size) + ("" if suffix_diy == "" else "_" + suffix_diy)
+    suffix = label_file + "_" + str(class_num) + "_" + str(num_sample) + "_" + str(batch_size) + ("" if suffix_diy == "" else "_" + suffix_diy)
     if train_:
         wandb.init(project="MicroIRC_" + suffix)
         wandb.config = {
