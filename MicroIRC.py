@@ -289,7 +289,7 @@ def node_personalization(node, anomaly_graph, baseline_df, faults_name, begin_ti
     return personalization
 
 # draw anomaly subgraph and execute personalized randow walk
-def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instances_map, instance_svc_map, begin_timestamp, end_timestamp, anomalie_instances, root_cause_level, root_cause, bias, call_set):
+def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instances_map, instance_svc_map, begin_timestamp, end_timestamp, anomalie_instances, root_cause_level, root_cause, call_set):
     # Get all the svc nodes and instance nodes associated with the exception detection
     edges = []
     nodes = []
@@ -665,7 +665,6 @@ if __name__ == '__main__':
         # params
         minute = 10
         alpha = 0.8
-        bias = 0.2
         instance_tolerant = 0.01
         service_tolerant = 0.03
         train = False
@@ -774,8 +773,7 @@ if __name__ == '__main__':
                 DG, anomalies, latency, file_dir, alpha,
                 svc_instances_map, instance_svc_map, 
                 begin_timestamp, end_timestamp, 
-                anomalie_instances, root_cause_level, root_cause, 
-                bias, call_set)
+                anomalie_instances, root_cause_level, root_cause, call_set)
 
             # ablation
             print('ablation Top K:')
@@ -830,7 +828,6 @@ if __name__ == '__main__':
         print('exception level:' + root_cause_level)
         print('params:')
         print('minute:' + str(minute))
-        print('bias:' + str(bias))
         print('alpha:' + str(alpha))
         print('service_tolerant:' + str(service_tolerant))
         print('instance_tolerant:' + str(instance_tolerant))
