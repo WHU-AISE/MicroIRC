@@ -7,7 +7,7 @@ class Encoder(nn.Module):
     """
     Encodes a node's using 'convolutional' GraphSage approach
     """
-    def __init__(self, features, feature_dim, 
+    def __init__(self, name, features, feature_dim,
             embed_dim, adj_lists, aggregator,
             metric,
             index_map_list,
@@ -16,6 +16,7 @@ class Encoder(nn.Module):
             feature_transform=False): 
         super(Encoder, self).__init__()
 
+        self.name = name
         self.features = features
         self.feat_dim = feature_dim
         self.adj_lists = adj_lists
@@ -41,11 +42,17 @@ class Encoder(nn.Module):
         nodes     -- list of nodes
         """
         neigh_nodes = []
+        # root cause time window size
+        time_window_minutes = 10
+        # sample minute gap
+        sample_interval = 1 / 12
+        # true neighbor value
+        true_neighbor_value = int(time_window_minutes / sample_interval / 2)
         for node in nodes:
             if is_node_train_index:
                 neigh_nodes.append(self.adj_lists[int(node)])
             else:
-                neigh_nodes.append({i for i in range(int(node) - 60, int(node) + 60)})
+                neigh_nodes.append({i for i in range(max(0, int(node) - true_neighbor_value), min(int(node) + true_neighbor_value, metric.index.max()))})
         # metric within neigh_nodes
         neigh_feats = self.aggregator.forward(nodes, neigh_nodes, metric,
                 self.num_sample, is_node_train_index)

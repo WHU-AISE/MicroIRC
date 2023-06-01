@@ -1,6 +1,6 @@
 class Time:
 
-    def __init__(self, begin_time, end_time, root_cause, root_cause_level, failure_type):
+    def __init__(self, begin_time, end_time, root_cause, root_cause_level, failure_type, label, index):
         self.begin = begin_time
         self.end = end_time
         self.begin_index = -1
@@ -9,6 +9,8 @@ class Time:
         self.root_cause = root_cause
         self.root_cause_level = root_cause_level
         self.failure_type = failure_type
+        self.label = label
+        self.index = index
 
     def in_time(self, time, index):
         is_in_time = False

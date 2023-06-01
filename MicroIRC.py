@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import random
 
 from sklearn.cluster import Birch
 from sklearn import preprocessing
@@ -17,6 +18,7 @@ from sklearn import preprocessing
 from utils.PageRank import pageRank
 from metric_sage.model import run_RCA
 from metric_sage.time import Time
+import torch
 
 from util import formalize
 
@@ -501,7 +503,8 @@ def print_pr(nums):
     pr10 = 0
     fill_nums = []
     for num in nums:
-        if num != 0 and num < 10:
+        # if num != 0 and num < 10:
+        if num != 0:
             fill_nums.append(num)
     for num in fill_nums:
         if num <= 10:
@@ -589,16 +592,22 @@ def getRootCauseSvc(root_cause):
 def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map, DG):
     root_cause_candidate_list = []
     for i in range(min(count, len(root_cause_list))):
+        root_cause_candidate_list.append(root_cause_list[i])
+    for i in range(min(count, len(root_cause_list))):
         root_cause = root_cause_list[i]
-        root_cause_candidate_list.append(root_cause)
         if DG.nodes[root_cause]['type'] == 'instance':
             # Instance root cause candidates plus services
-            root_cause_candidate_list.append(instance_svc_map[root_cause])
+            if instance_svc_map[root_cause] not in root_cause_candidate_list:
+                root_cause_candidate_list.append(instance_svc_map[root_cause])
         elif DG.nodes[root_cause]['type'] == 'service':
-            for i in svc_instances_map[root_cause]: root_cause_candidate_list.append(i)
+            for i in svc_instances_map[root_cause]:
+                if i not in root_cause_candidate_list:
+                    root_cause_candidate_list.append(i)
     return root_cause_candidate_list
 
-def trainGraphSage(time_list, folder, class_num, label_file ,train = False):
+
+def trainGraphSage(time_list, folder, metric_source_data, data, class_num, label_file, time_index, train=False, rate:float=1):
+    cuda = torch.cuda.is_available()
     # build svc call
     call_file_name = folder + '/' + 'call.csv'
     call_data = pd.read_csv(call_file_name)
@@ -607,51 +616,43 @@ def trainGraphSage(time_list, folder, class_num, label_file ,train = False):
         if 'timestamp' in head: continue
         call_set.append(head[:head.find('&')])
 
-    metric_source_data = pd.read_csv(folder + '/' + 'metric.csv')
-    data = metric_source_data.iloc[:,2:]
-    time_data = metric_source_data.iloc[:,0:1]
     node_num = 0
-    for i,row in time_data.iterrows():
-        for j, t in enumerate(time_list):
-            t.in_time(int(time_data[i:i+1]['timestamp']), i)
     for t in time_list:
         node_num += t.count
-    for i, column in data.items():
-        x = np.array(column)
-        x = np.where(np.isnan(x), 0, x)
-        normalized_x = preprocessing.normalize([x])
 
-        X = normalized_x.reshape(-1, 1)
-        data[i] = X
+    return run_RCA(node_num, 146, data, time_data, time_list, data, folder, class_num, label_file, time_index, train, cuda, rate)
 
-    return run_RCA(node_num, 146, data, time_data, time_list, data, folder, class_num, label_file ,train)
-
-def rank(classification_count, root_cause_list, label_data):
+def rank(classification_count, root_cause_list, label_data, label_map_revert):
     rank_list = {}
-    for i,root_cause in enumerate(root_cause_list):
+    for i, root_cause in enumerate(root_cause_list):
+        total_value = 0
         for item in enumerate(classification_count):
             key = item[1][0]
             value = item[1][1]
             try:
-                metric_root_cause = label_data.iloc[key - 1]['cmdb_id']
+                metric_root_cause = label_map_revert[key]
                 # if root_cause in metric_root_cause or metric_root_cause in root_cause:
-                if root_cause == metric_root_cause:
-                    rank_list.setdefault(metric_root_cause, (len(root_cause_list) - i) * value)
-                    break
+                if root_cause == metric_root_cause[:metric_root_cause.index('&')]:
+                    total_value += value
+                    continue
             except:
                 pass
-        try:
-            a = rank_list[metric_root_cause]
-            b = rank_list[root_cause]
-        except:
+        # try:
+        #     a = rank_list[metric_root_cause]
+        #     b = rank_list[root_cause]
+        # except:
+        #     rank_list.setdefault(root_cause, len(root_cause_list) - i)
+        if total_value == 0:
             rank_list.setdefault(root_cause, len(root_cause_list) - i)
+        else:
+            rank_list.setdefault(root_cause, (len(root_cause_list) - i) * total_value)
     return rank_list
+
 
 if __name__ == '__main__':
 
     folder_list = ['data/data1/1', 'data/data1/2']
-    label_list = ['2022-7-22 ', '2022-7-23 ']
-    label_file_list = ['20220722', '20220723']
+    data_list = ['2022-7-22 ', '2022-7-23 ']
     i_t_pr_1 = 0; i_t_pr_3 = 0; i_t_pr_5 = 0; i_t_pr_10 = 0; i_t_avg_1 = 0; i_t_avg_3 = 0; i_t_avg_5 = 0; i_t_avg_10 = 0
     s_t_pr_1 = 0; s_t_pr_3 = 0; s_t_pr_5 = 0; s_t_pr_10 = 0; s_t_avg_1 = 0; s_t_avg_3 = 0; s_t_avg_5 = 0; s_t_avg_10 = 0
 
@@ -667,34 +668,85 @@ if __name__ == '__main__':
         alpha = 0.8
         instance_tolerant = 0.01
         service_tolerant = 0.03
-        train = False
-        candidate_count = 20
-        class_num = 20
+        train = True
+        candidate_count = 10
+        # rate=1 means training all anomaly types, you can set 0 < rate <= 1, e.g., {0.8, 0.6, 0.4} mentioned in paper
+        rate = 1
+        # metrics sample time interval:5s
+        time_interval_minute = 1/12
+        node_overflow = int(minute / time_interval_minute / 2)
 
         # time_data
         metric_source_data = pd.read_csv(folder + '/' + 'metric.csv')
-        time_data = metric_source_data.iloc[:,0:1]
+        metric_source_data = metric_source_data.fillna(0)
+        time_data = metric_source_data.iloc[:, 0:1]
+
+        # normalize
+        data_normalize = metric_source_data.iloc[:,2:]
+        for cc, column in data_normalize.items():
+            x = np.array(column)
+            x = np.where(np.isnan(x), 0, x)
+            normalized_x = preprocessing.normalize([x])
+
+            X = normalized_x.reshape(-1, 1)
+            data_normalize[cc] = X
 
         # read root_causes
-        label_file_name = folder + '/' + 'label-' + label_file_list[i] + '.csv'
+        label_file_name = folder + '/' + 'label' + '.csv'
         label_data = pd.read_csv(label_file_name, encoding='utf-8')
+        label_set = set()
+        label_revert_set = set()
+        label_map = {}
+        label_map_revert = {}
+        for index, raw in label_data.iterrows():
+            label_set.add(raw['cmdb_id'] + raw['failure_description'])
+            label_revert_set.add(raw['cmdb_id'] + '&' + raw['failure_description'])
+        label_list = sorted(list(label_set))
+        for label in list(label_set):
+            label_map[label] = label_list.index(label)
+            label_revert = None
+            for l in label_revert_set:
+                if l[:l.index('&')] in label and l[l.index('&') + 1:] in label:
+                    label_revert = l
+                    break
+            if label_revert is not None:
+                label_map_revert[label_list.index(label)] = label_revert
+        class_num = len(label_set)
         root_causes = label_data['cmdb_id']
 
         time_list = []
 
+        j = 0
         for row in label_data.itertuples():
             root_cause = row[3]
             root_cause_level = row[2]
-            real_time = label_list[i] + row[1]
+            real_time = data_list[i] + row[1]
             real_timestamp = int(time.mktime(time.strptime(real_time, "%Y-%m-%d %H:%M:%S")))
-            begin_timestamp = real_timestamp - 60 * minute;
-            end_timestamp = real_timestamp + 60 * minute;
+            begin_timestamp = real_timestamp - 30 * minute
+            end_timestamp = real_timestamp + 30 * minute
             failure_type = row[4]
-            t = Time(begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type)
+            lb = label_map[root_cause + str(row[5])]
+            t = Time(begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type, lb, j + 1)
             time_list.append(t)
+            j += 1
+
+        for ti,row in time_data.iterrows():
+            for j, t in enumerate(time_list):
+                t.in_time(int(time_data[ti:ti+1]['timestamp']), ti)
+
+        time_index = []
+
+        if train:
+            random.shuffle(time_list)
+            time_list_shuffle = time_list[0:int(len(time_list) * rate)]
+            time_index = [t.index for t in time_list_shuffle]
+        else:
+            # input the index of model file suffix separated by "."
+            # time_index = []
+            time_list_shuffle = [t for t in time_list if t.index in time_index]
 
         # train GNN
-        graphsage = trainGraphSage(time_list, folder, class_num, label_file_list[i], train)
+        graphsage = trainGraphSage(time_list_shuffle, folder, metric_source_data, data_normalize, class_num, label_file_list[i], time_index, train, rate)
 
         # build svc call
         call_file_name = folder + '/' + 'call.csv'
@@ -786,10 +838,12 @@ if __name__ == '__main__':
             acc_ablation += my_acc(anomaly_score, [root_cause])
 
             root_cause_list = list(map(lambda p:p[0], anomaly_score))
-            root_cause_list = set(getCandidateList(root_cause_list, candidate_count, svc_instances_map, instance_svc_map, DG))
+            root_cause_list = getCandidateList(root_cause_list, candidate_count, svc_instances_map, instance_svc_map, DG)
             val = []
+            val_overflow = []
+            for i in range(max(0, t.begin_index - node_overflow), min(t.end_index + 1 + node_overflow, metric_source_data.index.max())): val_overflow.append(i)
             for i in range(t.begin_index, t.end_index + 1): val.append(i)
-            val_output = graphsage.forward(val, metric_source_data.iloc[:,2:].loc[val], is_node_train_index=False) 
+            val_output = graphsage.forward(val, data_normalize, is_node_train_index=False)
             classification = val_output.data.numpy().argmax(axis=1)
 
             classification_count = {}
@@ -802,7 +856,7 @@ if __name__ == '__main__':
                             key=lambda x: x[1], reverse=True)
 
             # Calculate the ranking results
-            rank_list = rank(classification_count, root_cause_list, label_data)
+            rank_list = rank(classification_count, root_cause_list, label_data, label_map_revert)
             rank_list = sorted(rank_list.items(),
                             key=lambda x: x[1], reverse=True)
             print('MicroIRC Top K:')

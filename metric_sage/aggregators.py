@@ -14,7 +14,7 @@ class MeanAggregator(nn.Module):
     """
     Aggregates a node's embeddings using mean of neighbors' embeddings
     """
-    def __init__(self, features, metric, index_map_list,cuda=False, gcn=False): 
+    def __init__(self, name, features, metric, index_map_list, feature_num, embed_num, cuda=False, gcn=False):
         """
         Initializes the aggregator for a specific graph.
 
@@ -25,11 +25,17 @@ class MeanAggregator(nn.Module):
 
         super(MeanAggregator, self).__init__()
 
+        self.name = name
         self.features = features
         self.cuda = cuda
         self.gcn = gcn
         self.metric = metric
         self.index_map_list = index_map_list
+        self.embed_num = embed_num
+        self.feature_num = feature_num
+        self.fc1 = nn.Linear(feature_num, feature_num * 2)
+        self.fc2 = nn.Linear(feature_num * 2, embed_num)
+
 
     def flattenlist(self, _2dlist):
         # defining an empty list
@@ -43,6 +49,10 @@ class MeanAggregator(nn.Module):
             else:
                 flatlist.append(item)
         return flatlist
+
+    def fc(self, x):
+        relu = nn.ReLU()
+        return self.fc2(relu(self.fc1(x)))
         
     def forward(self, nodes, neigh_nodes, metric, num_sample=10, is_node_train_index=True):
         """
@@ -52,7 +62,7 @@ class MeanAggregator(nn.Module):
         """
         # Local pointers to functions (speed hack)
         _set = set
-        if not num_sample is None:
+        if num_sample is not None:
             _sample = random.sample
             samp_neighs = [_set(_sample(neigh_node, 
                             num_sample,
@@ -81,18 +91,23 @@ class MeanAggregator(nn.Module):
         mask = mask.div(num_neigh)
         try:
             if self.cuda:
-                embed_matrix = self.features(torch.LongTensor(unique_nodes_list).cuda(), self.metric.loc[true_unique_nodes_list], is_node_train_index)
+                embed_matrix = self.features(torch.LongTensor(unique_nodes_list).cuda(), metric, is_node_train_index)
             else:
-                embed_matrix = self.features(torch.LongTensor(unique_nodes_list), self.metric.loc[true_unique_nodes_list], is_node_train_index)
+                embed_matrix = self.features(torch.LongTensor(unique_nodes_list), metric, is_node_train_index)
         except:
-            if self.cuda:
-                embed_matrix = self.features(torch.tensor(self.metric.loc[true_unique_nodes_list].values).cuda())
-            else:
-                # metric_feat = self.flattenlist([m.values for m in neigh_metric])
-                # embed_matrix = self.features(torch.tensor(metric_feat))
-                if is_node_train_index:
-                    embed_matrix = torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).view(len(true_unique_nodes_list), 146)
+            if is_node_train_index:
+                if self.cuda:
+                    embed_matrix = self.fc(torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).cuda()
+                                      .view(len(true_unique_nodes_list), self.feature_num))
                 else:
-                    embed_matrix = torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).view(len(true_unique_nodes_list), 146)
+                    embed_matrix = self.fc(torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values))
+                                      .view(len(true_unique_nodes_list), self.feature_num))
+            else:
+                if self.cuda:
+                    embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values)).cuda()
+                                      .view(len(unique_nodes_list), self.feature_num))
+                else:
+                    embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values))
+                                      .view(len(unique_nodes_list), self.feature_num))
         to_feats = mask.mm(embed_matrix)
         return to_feats
