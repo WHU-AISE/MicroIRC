@@ -637,11 +637,6 @@ def rank(classification_count, root_cause_list, label_data, label_map_revert):
                     continue
             except:
                 pass
-        # try:
-        #     a = rank_list[metric_root_cause]
-        #     b = rank_list[root_cause]
-        # except:
-        #     rank_list.setdefault(root_cause, len(root_cause_list) - i)
         if total_value == 0:
             rank_list.setdefault(root_cause, len(root_cause_list) - i)
         else:
@@ -653,6 +648,7 @@ if __name__ == '__main__':
 
     folder_list = ['data/data1/1', 'data/data1/2']
     data_list = ['2022-7-22 ', '2022-7-23 ']
+    label_file_list = ['20220722', '20220723']
     i_t_pr_1 = 0; i_t_pr_3 = 0; i_t_pr_5 = 0; i_t_pr_10 = 0; i_t_avg_1 = 0; i_t_avg_3 = 0; i_t_avg_5 = 0; i_t_avg_10 = 0
     s_t_pr_1 = 0; s_t_pr_3 = 0; s_t_pr_5 = 0; s_t_pr_10 = 0; s_t_avg_1 = 0; s_t_avg_3 = 0; s_t_avg_5 = 0; s_t_avg_10 = 0
 
@@ -736,14 +732,17 @@ if __name__ == '__main__':
 
         time_index = []
 
-        if train:
-            random.shuffle(time_list)
-            time_list_shuffle = time_list[0:int(len(time_list) * rate)]
-            time_index = [t.index for t in time_list_shuffle]
+        if 0 < rate and rate < 1:
+            if train:
+                random.shuffle(time_list)
+                time_list_shuffle = time_list[0:int(len(time_list) * rate)]
+                time_index = [t.index for t in time_list_shuffle]
+            else:
+                # input the index of model file suffix separated by "."
+                # time_index = []
+                time_list_shuffle = [t for t in time_list if t.index in time_index]
         else:
-            # input the index of model file suffix separated by "."
-            # time_index = []
-            time_list_shuffle = [t for t in time_list if t.index in time_index]
+            time_list_shuffle = time_list
 
         # train GNN
         graphsage = trainGraphSage(time_list_shuffle, folder, metric_source_data, data_normalize, class_num, label_file_list[i], time_index, train, rate)
