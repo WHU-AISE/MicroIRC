@@ -8,7 +8,7 @@ MicroIRC is an instance-level root cause localization method for microservice sy
 
 ### data
 
-contains data1
+contains dataset C
 
 ### model
 
