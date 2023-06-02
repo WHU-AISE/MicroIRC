@@ -8,15 +8,11 @@ MicroIRC is an instance-level root cause localization method for microservice sy
 
 ### data
 
-contains data1
+contains dataset C
 
 ### model
 
 store MetricSage multi-level parameter settings' models
-
-### locust
-
-locust script to send request
 
 ### metric_sage
 
