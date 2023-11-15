@@ -5,6 +5,10 @@
   MicroIRC is an instance-level root cause localization method for microservice systems.
   The utilization of microservice architecture is gaining popularity in the development of Web applications. However, identifying the root cause of a failure can be challenging due to the complexity of interconnected microservices, long service invocation links, dynamic changes in service states, and the abundance of service deployment nodes. Furthermore, as each microservice may have multiple instances, it can be difficult to identify the instance-level failure promptly and effectively when microservice topologies and failure types change dynamically. To address this issue, we propose MicroIRC (Instance-level Root Cause Localization for Microservices), a novel metrics-based approach that localizes root causes at the instance level while exhibiting robustness to adapt to new types of anomalies. We begin by training a graph neural network to fit different root cause types based on extracted time series features of microservice system metrics. Next, we construct a heterogeneous weighted topology (HWT) of microservice systems and execute a personalized random walk to identify root cause candidates. These candidates and real-time metrics within the anomaly time window are then fed into the original graph neural network, generating a ranked root cause list. Remarkably, it exhibits robustness in scenarios involving multiple instances and new failure types.
 
+## Framework
+
+[整体流程图20230913.pdf](https://github.com/WHU-AISE/MicroIRC/files/13358876/20230913.pdf)
+
 ## Folder Introduction
 
 ### data
