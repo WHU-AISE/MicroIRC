@@ -7,7 +7,7 @@
 
 ## Framework
 
-[整体流程图20230913.pdf](https://github.com/WHU-AISE/MicroIRC/files/13358876/20230913.pdf)
+<img width="1276" alt="image" src="https://github.com/WHU-AISE/MicroIRC/assets/48899336/98e26e68-dd65-4373-970a-8a340ab617ac">
 
 ## Folder Introduction
 
