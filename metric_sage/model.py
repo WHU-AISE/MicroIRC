@@ -100,7 +100,7 @@ def load_RCA_with_label(node_num, feat_num, df, time_data, time_list):
         label_map[label[0]].add(i)
     for s in label_map:
         for i in range(len(label_map[s])):
-            for j in range(len(label_map[s])):
+            for j in range(i, len(label_map[s])):
                 adj_lists[list(label_map[s])[i]].add(list(label_map[s])[j])
 
     return feat_data, labels, adj_lists, index_map_list

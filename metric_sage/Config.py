@@ -4,8 +4,8 @@ import torch
 
 class Config:
     def __init__(self, is_train=True, time_window_minutes=10,
-                 sample_interval=1 / 12, num_sample=10, batch_size=10,
-                 epochs=1000, learning_rate=0.01, minute=10, alpha=0.8,
+                 sample_interval=1 / 12, num_sample=10, batch_size=120,
+                 epochs=10000, learning_rate=0.5, minute=10, alpha=0.8,
                  instance_tolerant=0.01, service_tolerant=0.03, candidate_count=10,
                  rate=1):
         self.is_train = is_train
