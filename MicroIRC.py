@@ -23,10 +23,11 @@ import torch
 from util import formalize
 
 import warnings
+
 warnings.filterwarnings('ignore')
 
-
 smoothing_window = 12
+
 
 # Anomaly Detection
 
@@ -54,11 +55,12 @@ def birch_ad_with_smoothing(latency_df, threshold):
             brc.predict(X)
 
             labels = brc.labels_
-#            centroids = brc.subcluster_centers_
+            #            centroids = brc.subcluster_centers_
             n_clusters = np.unique(labels).size
             if n_clusters > 1:
                 anomalies.append(svc)
     return anomalies
+
 
 # draw topology graph containing instances and return the svc-instance two-way correspondence map
 def attributed_graph(instances, call_set, root_cause):
@@ -71,8 +73,8 @@ def attributed_graph(instances, call_set, root_cause):
         split = row.split('_')
         source = split[0]
         destination = split[1]
-        if 'rabbitmq' not in source and 'rabbitmq' not in destination :
-            if 'jaeger' not in source and 'jaeger' not in destination :
+        if 'rabbitmq' not in source and 'rabbitmq' not in destination:
+            if 'jaeger' not in source and 'jaeger' not in destination:
                 DG.add_edge(source, destination)
                 svc_list.append(source)
                 svc_list.append(destination)
@@ -108,45 +110,48 @@ def attributed_graph(instances, call_set, root_cause):
     # printDGNodes(DG)
     # printDGEdges(DG)
 
-#    plt.figure(figsize=(9,9))
-#    nx.draw(DG, with_labels=True, font_weight='bold')
-#    pos = nx.spring_layout(DG)
-#    nx.draw(DG, pos, with_labels=True, cmap = plt.get_cmap('jet'), node_size=1500, arrows=True, )
-#    labels = nx.get_edge_attributes(DG,'weight')
-#    nx.draw_networkx_edge_labels(DG,pos,edge_labels=labels)
-#    plt.show()
+    #    plt.figure(figsize=(9,9))
+    #    nx.draw(DG, with_labels=True, font_weight='bold')
+    #    pos = nx.spring_layout(DG)
+    #    nx.draw(DG, pos, with_labels=True, cmap = plt.get_cmap('jet'), node_size=1500, arrows=True, )
+    #    labels = nx.get_edge_attributes(DG,'weight')
+    #    nx.draw_networkx_edge_labels(DG,pos,edge_labels=labels)
+    #    plt.show()
 
     return DG, svc_instances_map, instance_svc_map
+
 
 # draw and output file
 def draw(DG, file_name):
     pos = nx.spring_layout(DG)
     nx.draw(DG,
-        pos,
-        node_color = '#B0C4DE',
-        edge_color = (0,0,0,0.5),
-        font_color = 'b',
-        with_labels = True,
-        font_size = 10,
-        node_size = 600,
-        width = 2,
-        font_weight = 'bold')
-    labels = nx.get_edge_attributes(DG,'weight')
-    nx.draw_networkx_edge_labels(DG,pos,edge_labels=labels, font_size=12)
+            pos,
+            node_color='#B0C4DE',
+            edge_color=(0, 0, 0, 0.5),
+            font_color='b',
+            with_labels=True,
+            font_size=10,
+            node_size=600,
+            width=2,
+            font_weight='bold')
+    labels = nx.get_edge_attributes(DG, 'weight')
+    nx.draw_networkx_edge_labels(DG, pos, edge_labels=labels, font_size=12)
     plt.title(file_name)
-    plt.savefig('picture/' + file_name + '.svg',format='svg',dpi=150)
+    plt.savefig('picture/' + file_name + '.svg', format='svg', dpi=150)
+
 
 def printDGNodes(DG):
     for node in DG.nodes(data=True):
         print(node)
 
+
 def printDGEdges(DG):
     for edge in DG.edges(data=True):
         print(edge)
 
+
 # calculate nodes' weights
 def node_weight(svc, anomaly_graph, baseline_df, faults_name, instance, begin_timestamp, end_timestamp):
-
     # Get the average weight of the in_edges
     in_edges_weight_avg = 0.0
     num = 0
@@ -164,12 +169,14 @@ def node_weight(svc, anomaly_graph, baseline_df, faults_name, instance, begin_ti
     metric = node_cols[0]
     for col in node_cols:
         # the correlation between the instance and its node
-        temp = abs((pd.Series(formalize(baseline_df[instance].fillna(0)).squeeze())).corr(pd.Series(formalize(df[col].fillna(0)).squeeze())))
+        temp = abs((pd.Series(formalize(baseline_df[instance].fillna(0)).squeeze())).corr(
+            pd.Series(formalize(df[col].fillna(0)).squeeze())))
         if temp > max_corr:
             max_corr = temp
             metric = col
     data = in_edges_weight_avg * max_corr
     return data, metric
+
 
 def dfTimelimit(df, begin_timestamp, end_timestamp):
     begin_index = 0
@@ -185,6 +192,7 @@ def dfTimelimit(df, begin_timestamp, end_timestamp):
     df = df.loc[begin_index:end_index]
     return df
 
+
 # Get the instance baseline
 def getInstanceBaseline(svc, instance, baseline_df, faults_name, begin_timestamp, end_timestamp):
     filename = faults_name + '/' + instance + '.csv'
@@ -196,11 +204,13 @@ def getInstanceBaseline(svc, instance, baseline_df, faults_name, begin_timestamp
     max = 0
     max_col = df.columns[3]
     for column in df.columns[2:-3]:
-        piece = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(pd.Series(formalize(df[column].fillna(0)).squeeze())))
+        piece = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(
+            pd.Series(formalize(df[column].fillna(0)).squeeze())))
         if piece > max:
             max = piece
             max_col = column
     return df[max_col]
+
 
 # the correlation between the instance and its service
 def corrSvcAndInstances(svc, instance, baseline_df, faults_name, begin_timestamp, end_timestamp):
@@ -210,10 +220,12 @@ def corrSvcAndInstances(svc, instance, baseline_df, faults_name, begin_timestamp
     total = 0
     max = 0
     for column in df.columns[2:-3]:
-        piece = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(pd.Series(formalize(df[column].fillna(0)).squeeze())))
+        piece = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(
+            pd.Series(formalize(df[column].fillna(0)).squeeze())))
         if piece > max:
             max = piece
     return max
+
 
 # the correlation between the instance and its node
 def corrNodeAndInstances(instance, faults_name, begin_timestamp, end_timestamp):
@@ -224,10 +236,12 @@ def corrNodeAndInstances(instance, faults_name, begin_timestamp, end_timestamp):
     max = 0.01
     for column in df.columns[2:-3]:
         for node_column in df.columns[-3:]:
-            piece = abs((pd.Series(formalize(df[column].fillna(0)).squeeze())).corr(pd.Series(formalize(df[node_column].fillna(0)).squeeze())))
+            piece = abs((pd.Series(formalize(df[column].fillna(0)).squeeze())).corr(
+                pd.Series(formalize(df[node_column].fillna(0)).squeeze())))
             if piece > max:
                 max = piece
     return max
+
 
 def instance_personalization(svc, anomaly_graph, baseline_df, faults_name, instance, begin_timestamp, end_timestamp):
     filename = faults_name + '/' + instance + '.csv'
@@ -238,7 +252,8 @@ def instance_personalization(svc, anomaly_graph, baseline_df, faults_name, insta
     metric = ctn_cols[0]
     total = 0
     for col in ctn_cols:
-        temp = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(pd.Series(formalize(df[col].fillna(0)).squeeze())))
+        temp = abs((pd.Series(formalize(baseline_df[svc].fillna(0)).squeeze())).corr(
+            pd.Series(formalize(df[col].fillna(0)).squeeze())))
         # total += temp
         if temp > max_corr:
             max_corr = temp
@@ -249,7 +264,7 @@ def instance_personalization(svc, anomaly_graph, baseline_df, faults_name, insta
     num = 0
     for u, v, data in anomaly_graph.in_edges(svc, data=True):
         num = num + 1
-        edges_weight_avg = edges_weight_avg + data['weight'] 
+        edges_weight_avg = edges_weight_avg + data['weight']
 
     svc_instance_data = 0.01
     for u, v, data in anomaly_graph.out_edges(svc, data=True):
@@ -261,6 +276,7 @@ def instance_personalization(svc, anomaly_graph, baseline_df, faults_name, insta
     personalization = edges_weight_avg
 
     return personalization, max_corr
+
 
 def svc_personalization(svc, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp):
     # The total value of statistical svc
@@ -277,21 +293,24 @@ def svc_personalization(svc, anomaly_graph, baseline_df, faults_name, begin_time
 
     return personalization
 
+
 def node_personalization(node, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp):
     # Count the total value of instances on the node
     edges_weight_avg = 0.0
     num = 0
     for u, v, data in anomaly_graph.in_edges(node, data=True):
         num = num + 1
-        edges_weight_avg = edges_weight_avg + data['weight'] 
+        edges_weight_avg = edges_weight_avg + data['weight']
 
-    # Total value of svc to instance conversion
+        # Total value of svc to instance conversion
     edges_weight_avg = edges_weight_avg / num
     personalization = edges_weight_avg
     return personalization
 
+
 # draw anomaly subgraph and execute personalized randow walk
-def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instances_map, instance_svc_map, begin_timestamp, end_timestamp, anomalie_instances, root_cause_level, root_cause, call_set):
+def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instances_map, instance_svc_map,
+                     begin_timestamp, end_timestamp, anomalie_instances, root_cause_level, root_cause, call_set):
     # Get all the svc nodes and instance nodes associated with the exception detection
     edges = []
     nodes = []
@@ -304,7 +323,7 @@ def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instance
     # Draw anomaly subgraphs from anomaly nodes
     for anomaly in anomalies:
         edge = anomaly.split('_')
-        edge[1] = edge[1][:len(edge[1])-4]
+        edge[1] = edge[1][:len(edge[1]) - 4]
         if edge not in edge_walk:
             edge_walk.append(edge)
         edges.append(tuple(edge))
@@ -375,21 +394,23 @@ def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instance
             edge = (u, v)
             if edge in edges:
                 data = alpha
-                if DG.nodes[v]['type'] == 'instance' :
-                    anomaly_graph.add_edge(v, 'node', weight=corrNodeAndInstances(v, faults_name, begin_timestamp, end_timestamp))
+                if DG.nodes[v]['type'] == 'instance':
+                    anomaly_graph.add_edge(v, 'node',
+                                           weight=corrNodeAndInstances(v, faults_name, begin_timestamp, end_timestamp))
                     anomaly_graph.nodes['node']['type'] = 'host'
             else:
-                if DG.nodes[v]['type'] == 'instance' :
+                if DG.nodes[v]['type'] == 'instance':
                     # Assign weights based on similarity of metrics
                     data = corrSvcAndInstances(u, v, baseline_df, faults_name, begin_timestamp, end_timestamp)
-                    anomaly_graph.add_edge(v, 'node', weight=corrNodeAndInstances(v, faults_name, begin_timestamp, end_timestamp))
+                    anomaly_graph.add_edge(v, 'node',
+                                           weight=corrNodeAndInstances(v, faults_name, begin_timestamp, end_timestamp))
                     anomaly_graph.nodes['node']['type'] = 'host'
                 else:
                     if 'redis' in v:
                         continue
                     normal_edge = u + '_' + v
                     # Calculate the correlation between the delay of this node and the anomaly node
-                    data = abs(baseline_df[u].corr(latency_df[normal_edge+"&p50"]))
+                    data = abs(baseline_df[u].corr(latency_df[normal_edge + "&p50"]))
             data = 0 if np.isnan(data) else data
             data = round(data, 3)
             anomaly_graph.add_edge(u, v, weight=data)
@@ -413,16 +434,16 @@ def anomaly_subgraph(DG, anomalies, latency_df, faults_name, alpha, svc_instance
         if node == 'unknown': continue
         if DG.nodes[node]['type'] == 'service':
             personalization[node] = round(svc_personalization(
-            node, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp), 3)
-        elif DG.nodes[node]['type'] == 'host': 
+                node, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp), 3)
+        elif DG.nodes[node]['type'] == 'host':
             personalization[node] = round(node_personalization(
-            node, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp), 3)
+                node, anomaly_graph, baseline_df, faults_name, begin_timestamp, end_timestamp), 3)
         elif DG.nodes[node]['type'] == 'instance':
             svc = instance_svc_map[node]
             svc_personalization_map.setdefault(svc, 0)
             svc_personalization_count.setdefault(svc, 0)
             p, max_corr = instance_personalization(
-            svc, anomaly_graph, baseline_df, faults_name, node, begin_timestamp, end_timestamp)
+                svc, anomaly_graph, baseline_df, faults_name, node, begin_timestamp, end_timestamp)
             # personalization[node] = p / anomaly_graph.degree(node)
             personalization[node] = round(p, 3)
 
@@ -476,7 +497,7 @@ def count_rank(anomaly_score, target, target_svc, svc_instances_map, instance_sv
                 instance_rank += (idx + 1)
                 true_instance_count += 1
         if true_instance_count / instance_count >= 0.6:
-            num_relation = 1 if(instance_rank - 3 * true_instance_count) <= 0 else min_rank
+            num_relation = 1 if (instance_rank - 3 * true_instance_count) <= 0 else min_rank
     # If the instance-level anomaly
     if target != target_svc:
         if len(svc_instances_map[instance_svc_map[target]]) == 1:
@@ -489,6 +510,7 @@ def count_rank(anomaly_score, target, target_svc, svc_instances_map, instance_sv
         num = min(num, num_relation)
     print(target, ' Top K: ', num)
     return num, svc_num
+
 
 def print_pr(nums):
     pr1 = 0
@@ -551,6 +573,7 @@ def print_pr(nums):
     print('AVG@10:' + str(avg_10))
     return pr_1, pr_3, pr_5, pr_10, avg_1, avg_3, avg_5, avg_10
 
+
 def my_acc(scoreList, rightOne, n=None):
     node_rank = [_[0] for _ in scoreList]
     if n is None:
@@ -565,8 +588,9 @@ def my_acc(scoreList, rightOne, n=None):
     s /= len(rightOne)
     return s
 
+
 def getInstancesName(folder):
-    success_rate_file_name = folder +'/' + 'success_rate.csv'
+    success_rate_file_name = folder + '/' + 'success_rate.csv'
     success_rate_source_data = pd.read_csv(success_rate_file_name)
     headers = success_rate_source_data.columns
     instances = []
@@ -577,6 +601,7 @@ def getInstancesName(folder):
     # print(instancesSet)
     return instancesSet
 
+
 def cutSvcNameForAnomalyNodes(anomaly_nodes):
     anomaly_nodes_cut = []
     for node in anomaly_nodes:
@@ -585,9 +610,11 @@ def cutSvcNameForAnomalyNodes(anomaly_nodes):
         anomaly_nodes_cut.append(node)
     return anomaly_nodes_cut
 
+
 def getRootCauseSvc(root_cause):
     if '-' not in root_cause: return root_cause
     return root_cause[:root_cause.find('-')]
+
 
 def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map, DG):
     root_cause_candidate_list = []
@@ -606,21 +633,16 @@ def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map
     return root_cause_candidate_list
 
 
-def trainGraphSage(time_list, folder, metric_source_data, data, class_num, label_file, time_index, train=False, rate:float=1):
+def trainGraphSage(time_list, folder, data, class_num, label_file, time_index, train=False, rate: float = 1):
     cuda = torch.cuda.is_available()
-    # build svc call
-    call_file_name = folder + '/' + 'call.csv'
-    call_data = pd.read_csv(call_file_name)
-    call_set = []
-    for head in call_data.columns:
-        if 'timestamp' in head: continue
-        call_set.append(head[:head.find('&')])
 
     node_num = 0
     for t in time_list:
         node_num += t.count
 
-    return run_RCA(node_num, 146, data, time_data, time_list, data, folder, class_num, label_file, time_index, train, cuda, rate)
+    return run_RCA(node_num, len(data.columns), data, time_data, time_list, data, class_num, label_file, time_index,
+                   folder, train, cuda, rate)
+
 
 def rank(classification_count, root_cause_list, label_data, label_map_revert):
     rank_list = {}
@@ -649,11 +671,39 @@ if __name__ == '__main__':
     folder_list = ['data/data1/1', 'data/data1/2']
     data_list = ['2022-7-22 ', '2022-7-23 ']
     label_file_list = ['20220722', '20220723']
-    i_t_pr_1 = 0; i_t_pr_3 = 0; i_t_pr_5 = 0; i_t_pr_10 = 0; i_t_avg_1 = 0; i_t_avg_3 = 0; i_t_avg_5 = 0; i_t_avg_10 = 0
-    s_t_pr_1 = 0; s_t_pr_3 = 0; s_t_pr_5 = 0; s_t_pr_10 = 0; s_t_avg_1 = 0; s_t_avg_3 = 0; s_t_avg_5 = 0; s_t_avg_10 = 0
+    i_t_pr_1 = 0
+    i_t_pr_3 = 0
+    i_t_pr_5 = 0
+    i_t_pr_10 = 0
+    i_t_avg_1 = 0
+    i_t_avg_3 = 0
+    i_t_avg_5 = 0
+    i_t_avg_10 = 0
+    s_t_pr_1 = 0
+    s_t_pr_3 = 0
+    s_t_pr_5 = 0
+    s_t_pr_10 = 0
+    s_t_avg_1 = 0
+    s_t_avg_3 = 0
+    s_t_avg_5 = 0
+    s_t_avg_10 = 0
 
-    i_t_pr_1_a = 0; i_t_pr_3_a = 0; i_t_pr_5_a = 0; i_t_pr_10_a = 0; i_t_avg_1_a = 0; i_t_avg_3_a = 0; i_t_avg_5_a = 0; i_t_avg_10_a = 0
-    s_t_pr_1_a = 0; s_t_pr_3_a = 0; s_t_pr_5_a = 0; s_t_pr_10_a = 0; s_t_avg_1_a = 0; s_t_avg_3_a = 0; s_t_avg_5_a = 0; s_t_avg_10_a = 0
+    i_t_pr_1_a = 0
+    i_t_pr_3_a = 0
+    i_t_pr_5_a = 0
+    i_t_pr_10_a = 0
+    i_t_avg_1_a = 0
+    i_t_avg_3_a = 0
+    i_t_avg_5_a = 0
+    i_t_avg_10_a = 0
+    s_t_pr_1_a = 0
+    s_t_pr_3_a = 0
+    s_t_pr_5_a = 0
+    s_t_pr_10_a = 0
+    s_t_avg_1_a = 0
+    s_t_avg_3_a = 0
+    s_t_avg_5_a = 0
+    s_t_avg_10_a = 0
 
     data_count = len(folder_list)
     for i in range(data_count):
@@ -669,7 +719,7 @@ if __name__ == '__main__':
         # rate=1 means training all anomaly types, you can set 0 < rate <= 1, e.g., {0.8, 0.6, 0.4} mentioned in paper
         rate = 1
         # metrics sample time interval:5s
-        time_interval_minute = 1/12
+        time_interval_minute = 1 / 12
         node_overflow = int(minute / time_interval_minute / 2)
 
         # time_data
@@ -678,7 +728,7 @@ if __name__ == '__main__':
         time_data = metric_source_data.iloc[:, 0:1]
 
         # normalize
-        data_normalize = metric_source_data.iloc[:,2:]
+        data_normalize = metric_source_data.iloc[:, 2:]
         for cc, column in data_normalize.items():
             x = np.array(column)
             x = np.where(np.isnan(x), 0, x)
@@ -726,13 +776,13 @@ if __name__ == '__main__':
             time_list.append(t)
             j += 1
 
-        for ti,row in time_data.iterrows():
+        for ti, row in time_data.iterrows():
             for j, t in enumerate(time_list):
-                t.in_time(int(time_data[ti:ti+1]['timestamp']), ti)
+                t.in_time(int(time_data[ti:ti + 1]['timestamp']), ti)
 
         time_index = []
 
-        if 0 < rate and rate < 1:
+        if 0 < rate < 1:
             if train:
                 random.shuffle(time_list)
                 time_list_shuffle = time_list[0:int(len(time_list) * rate)]
@@ -745,7 +795,8 @@ if __name__ == '__main__':
             time_list_shuffle = time_list
 
         # train GNN
-        graphsage = trainGraphSage(time_list_shuffle, folder, metric_source_data, data_normalize, class_num, label_file_list[i], time_index, train, rate)
+        graphsage = trainGraphSage(time_list_shuffle, folder, data_normalize, class_num, label_file_list[i], time_index,
+                                   train, rate)
 
         # build svc call
         call_file_name = folder + '/' + 'call.csv'
@@ -822,13 +873,14 @@ if __name__ == '__main__':
             # Building anomaly subgraphs and scoring with personalized PageRank
             anomaly_score = anomaly_subgraph(
                 DG, anomalies, latency, file_dir, alpha,
-                svc_instances_map, instance_svc_map, 
-                begin_timestamp, end_timestamp, 
+                svc_instances_map, instance_svc_map,
+                begin_timestamp, end_timestamp,
                 anomalie_instances, root_cause_level, root_cause, call_set)
 
             # ablation
             print('ablation Top K:')
-            num, svc_num = count_rank(anomaly_score, root_cause, getRootCauseSvc(root_cause), svc_instances_map, instance_svc_map)
+            num, svc_num = count_rank(anomaly_score, root_cause, getRootCauseSvc(root_cause), svc_instances_map,
+                                      instance_svc_map)
             nums_ablation.append(num)
             svc_nums_ablation.append(svc_num)
             acc_temp = my_acc(anomaly_score, [root_cause])
@@ -836,11 +888,13 @@ if __name__ == '__main__':
                 acc_ablation_count += 1
             acc_ablation += my_acc(anomaly_score, [root_cause])
 
-            root_cause_list = list(map(lambda p:p[0], anomaly_score))
-            root_cause_list = getCandidateList(root_cause_list, candidate_count, svc_instances_map, instance_svc_map, DG)
+            root_cause_list = list(map(lambda p: p[0], anomaly_score))
+            root_cause_list = getCandidateList(root_cause_list, candidate_count, svc_instances_map, instance_svc_map,
+                                               DG)
             val = []
             val_overflow = []
-            for i in range(max(0, t.begin_index - node_overflow), min(t.end_index + 1 + node_overflow, metric_source_data.index.max())): val_overflow.append(i)
+            for i in range(max(0, t.begin_index - node_overflow),
+                           min(t.end_index + 1 + node_overflow, metric_source_data.index.max())): val_overflow.append(i)
             for i in range(t.begin_index, t.end_index + 1): val.append(i)
             val_output = graphsage.forward(val, data_normalize, is_node_train_index=False)
             classification = val_output.data.numpy().argmax(axis=1)
@@ -852,14 +906,15 @@ if __name__ == '__main__':
                 except:
                     classification_count.setdefault(c, 1)
             classification_count = sorted(classification_count.items(),
-                            key=lambda x: x[1], reverse=True)
+                                          key=lambda x: x[1], reverse=True)
 
             # Calculate the ranking results
             rank_list = rank(classification_count, root_cause_list, label_data, label_map_revert)
             rank_list = sorted(rank_list.items(),
-                            key=lambda x: x[1], reverse=True)
+                               key=lambda x: x[1], reverse=True)
             print('MicroIRC Top K:')
-            num, svc_num = count_rank(rank_list, root_cause, getRootCauseSvc(root_cause), svc_instances_map, instance_svc_map)
+            num, svc_num = count_rank(rank_list, root_cause, getRootCauseSvc(root_cause), svc_instances_map,
+                                      instance_svc_map)
             nums.append(num)
             svc_nums.append(svc_num)
             acc_temp = my_acc(rank_list, [root_cause])
@@ -877,7 +932,7 @@ if __name__ == '__main__':
                 svc_level_nums.append(svc_num)
                 failure_type_nums.append(svc_num)
             failure_type_map[failure_type] = failure_type_nums
-        
+
         print('exception level:' + root_cause_level)
         print('params:')
         print('minute:' + str(minute))
@@ -896,7 +951,7 @@ if __name__ == '__main__':
         i_t_avg_3 += i_avg_3
         i_t_avg_5 += i_avg_5
         i_t_avg_10 += i_avg_10
-        
+
         print('svc_pr:')
         s_pr_1, s_pr_3, s_pr_5, s_pr_10, s_avg_1, s_avg_3, s_avg_5, s_avg_10 = print_pr(svc_nums)
         s_t_pr_1 += s_pr_1
@@ -919,7 +974,7 @@ if __name__ == '__main__':
         i_t_avg_3_a += i_avg_3
         i_t_avg_5_a += i_avg_5
         i_t_avg_10_a += i_avg_10
-        
+
         print('svc_pr_ablation:')
         s_pr_1, s_pr_3, s_pr_5, s_pr_10, s_avg_1, s_avg_3, s_avg_5, s_avg_10 = print_pr(svc_nums_ablation)
         s_t_pr_1_a += s_pr_1
@@ -933,7 +988,8 @@ if __name__ == '__main__':
 
         # PR@K in different levels
         print('level_instance_pr:')
-        l_i_pr_1, l_i_pr_3, l_i_pr_5, l_i_pr_10, l_i_avg_1, l_i_avg_3, l_i_avg_5, l_i_avg_10 = print_pr(instance_level_nums)
+        l_i_pr_1, l_i_pr_3, l_i_pr_5, l_i_pr_10, l_i_avg_1, l_i_avg_3, l_i_avg_5, l_i_avg_10 = print_pr(
+            instance_level_nums)
         print('level_svc_pr:')
         l_s_pr_1, l_s_pr_3, l_s_pr_5, l_s_pr_10, l_s_avg_1, l_s_avg_3, l_s_avg_5, l_s_avg_10 = print_pr(svc_level_nums)
 
