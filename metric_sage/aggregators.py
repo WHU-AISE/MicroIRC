@@ -113,6 +113,6 @@ class MeanAggregator(nn.Module):
                 if self.cuda:
                     embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values)).cuda())
                 else:
-                    embed_matrix = self.fc(mask.mm(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values))))
+                    embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values)))
         to_feats = mask.mm(embed_matrix)
         return F.relu(to_feats)

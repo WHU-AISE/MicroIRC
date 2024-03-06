@@ -21,7 +21,7 @@ from metric_sage.time import Time
 import torch
 
 from util import formalize
-
+from metric_sage.Config import Config
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -633,15 +633,13 @@ def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map
     return root_cause_candidate_list
 
 
-def trainGraphSage(time_list, folder, data, class_num, label_file, time_index, train=False, rate: float = 1):
-    cuda = torch.cuda.is_available()
-
+def trainGraphSage(time_list, folder, data, class_num, label_file, time_index, config: Config):
     node_num = 0
     for t in time_list:
         node_num += t.count
 
     return run_RCA(node_num, len(data.columns), data, time_data, time_list, data, class_num, label_file, time_index,
-                   folder, train, cuda, rate)
+                   folder, config)
 
 
 def rank(classification_count, root_cause_list, label_data, label_map_revert):
@@ -705,22 +703,23 @@ if __name__ == '__main__':
     s_t_avg_5_a = 0
     s_t_avg_10_a = 0
 
+    config = Config()
     data_count = len(folder_list)
     for i in range(data_count):
         folder = folder_list[i]
 
         # params
-        minute = 10
-        alpha = 0.8
-        instance_tolerant = 0.01
-        service_tolerant = 0.03
-        train = True
-        candidate_count = 10
+        minute = config.minute
+        alpha = config.alpha
+        instance_tolerant = config.instance_tolerant
+        service_tolerant = config.service_tolerant
+        train = config.is_train
+        candidate_count = config.candidate_count
         # rate=1 means training all anomaly types, you can set 0 < rate <= 1, e.g., {0.8, 0.6, 0.4} mentioned in paper
-        rate = 1
+        rate = config.rate
         # metrics sample time interval:5s
-        time_interval_minute = 1 / 12
-        node_overflow = int(minute / time_interval_minute / 2)
+        time_interval_minute = config.sample_interval
+        node_overflow = config.node_overflow
 
         # time_data
         metric_source_data = pd.read_csv(folder + '/' + 'metric.csv')
@@ -796,7 +795,7 @@ if __name__ == '__main__':
 
         # train GNN
         graphsage = trainGraphSage(time_list_shuffle, folder, data_normalize, class_num, label_file_list[i], time_index,
-                                   train, rate)
+                                   config)
 
         # build svc call
         call_file_name = folder + '/' + 'call.csv'

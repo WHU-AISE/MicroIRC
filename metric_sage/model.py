@@ -105,46 +105,40 @@ def load_RCA_with_label(node_num, feat_num, df, time_data, time_list):
 
     return feat_data, labels, adj_lists, index_map_list
 
-def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, label_file, time_index, folder='.', train_=False, cuda=False, rate=1):
+def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, label_file, time_index, folder, config: Config):
     np.random.seed(1)
     random.seed(1)
     num_nodes = node_num
     feat_data, labels, adj_lists, index_map_list = load_RCA_with_label(node_num, feat_num, df, time_data, time_list)
 
-    config = Config(train_)
-    agg1 = MeanAggregator(config, 'agg1', None, metric, index_map_list, feat_num, 64, cuda=cuda)
-    enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, metric, index_map_list, gcn=True, cuda=cuda)
-    agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), metric, index_map_list, feat_num, 32, cuda=cuda)
+    agg1 = MeanAggregator(config, 'agg1', None, metric, index_map_list, feat_num, 64, cuda=config.cuda)
+    enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, metric, index_map_list, gcn=True, cuda=config.cuda)
+    agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), metric, index_map_list, feat_num, 32, cuda=config.cuda)
     enc2 = Encoder(config, 'enc2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), enc1.embed_dim, class_num, adj_lists, agg2, metric, index_map_list,
-            base_model=enc1, gcn=True, cuda=cuda)
+            base_model=enc1, gcn=True, cuda=config.cuda)
     
     # train parameters
-    epochs = 3000
-    learning_rate = 0.5
+    epochs = config.epochs
+    learning_rate = config.learning_rate
 
     graphsage = SupervisedGraphSage(class_num, enc2)
-    if cuda:
+    if config.cuda:
         graphsage = graphsage.cuda()
     rand_indices = np.random.permutation(num_nodes)
     division = int(len(rand_indices) / 10)
-    if num_nodes < 1000:
-        batch_size = int(division * 2)
-    elif num_nodes >= 1000 and num_nodes < 10000:
-        batch_size = int(division)
-    else:
-        batch_size = int(division / 5)
     test = rand_indices[:division]
     val = rand_indices[division:2 * division]
     train = list(rand_indices[2 * division:])
+    batch_size = config.batch_size
     # model diy name
     # suffix_diy = "data_modify"
     suffix_diy = ""
     time_index_str = ""
     for ti in time_index:
         time_index_str = time_index_str + (str(ti) + ".")
-    suffix = label_file + "_" + str(class_num) + "_" + str(rate) + "_" + str(config.num_sample) + "_" + str(epochs) + \
+    suffix = label_file + "_" + str(class_num) + "_" + str(config.rate) + "_" + str(config.num_sample) + "_" + str(epochs) + \
              "_" + str(learning_rate) + ("" if suffix_diy == "" else "_" + suffix_diy) + "_" + time_index_str
-    if train_:
+    if config.is_train:
         wandb.init(project="MicroIRC_" + suffix)
         wandb.config = {
         "learning_rate": learning_rate,
