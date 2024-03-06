@@ -160,8 +160,10 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
                 random.shuffle(train)
                 start_time = time.time()
                 optimizer.zero_grad()
-                loss = graphsage.loss(batch_nodes, metric.loc[index_map(batch_nodes, index_map_list)],
-                        Variable(torch.LongTensor(labels[np.array(batch_nodes)])))
+                labels_v = torch.LongTensor(labels[np.array(batch_nodes)])
+                if config.cuda:
+                    labels_v = labels_v.cuda()
+                loss = graphsage.loss(batch_nodes, metric.loc[index_map(batch_nodes, index_map_list)], labels_v)
                 loss.backward()
                 optimizer.step()
                 end_time = time.time()
