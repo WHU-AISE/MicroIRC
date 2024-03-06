@@ -7,7 +7,7 @@ class Config:
                  sample_interval=1 / 12, num_sample=10, batch_size=120,
                  epochs=10000, learning_rate=0.5, minute=10, alpha=0.8,
                  instance_tolerant=0.01, service_tolerant=0.03, candidate_count=10,
-                 rate=1):
+                 rate=1, epoch_size=1):
         self.is_train = is_train
         self.time_window_minutes = time_window_minutes
         self.sample_interval = sample_interval
@@ -26,3 +26,4 @@ class Config:
         self.rate = rate
         self.node_overflow = int(minute / sample_interval / 2)
         self.cuda = torch.cuda.is_available()
+        self.epoch_size = epoch_size

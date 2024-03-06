@@ -146,13 +146,16 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
         "batch_size": batch_size
         }
         optimizer = torch.optim.SGD(filter(lambda p : p.requires_grad, graphsage.parameters()), lr=learning_rate)
-        scheduler = StepLR(optimizer, step_size=1, gamma=0.1)
+        scheduler = StepLR(optimizer, step_size=1, gamma=0.5)
         times = []
-        epoch_size = 2
+        epoch_size = config.epoch_size
+        total_epochs = 0
         for epoch in range(epoch_size):
             print('train with epoch:' + str(epoch + 1))
-            scheduler.step()
             for batch in range(epochs):
+                total_epochs += 1
+                if total_epochs % 2000 == 0:
+                    scheduler.step()
                 batch_nodes = train[:batch_size]
                 random.shuffle(train)
                 start_time = time.time()
