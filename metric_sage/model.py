@@ -174,7 +174,7 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
                     wandb.watch(graphsage)
 
         val_output = graphsage.forward(val, metric.loc[index_map(val, index_map_list)], True) 
-        print("Validation F1:", f1_score(labels[val], val_output.data.numpy().argmax(axis=1), average="micro"))
+        print("Validation F1:", f1_score(labels[val], val_output.data.cpu().numpy().argmax(axis=1), average="micro"))
         print("Average batch time:", np.mean(times))
         _dir = folder + "/model"
         if not os.path.exists(_dir):
