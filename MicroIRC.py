@@ -4,7 +4,7 @@
 @author: zhuyuhan2333
 """
 
-from os import error
+import os
 import time
 import pandas as pd
 import numpy as np
@@ -13,14 +13,13 @@ import matplotlib.pyplot as plt
 import random
 
 from sklearn.cluster import Birch
-from sklearn import preprocessing
-
+from util import time_string_2_timestamp
 from utils.PageRank import pageRank
 from metric_sage.model import run_RCA
 from metric_sage.time import Time
 import torch
 
-from util import formalize
+from util import *
 from metric_sage.Config import Config
 import warnings
 
@@ -633,16 +632,16 @@ def getCandidateList(root_cause_list, count, svc_instances_map, instance_svc_map
     return root_cause_candidate_list
 
 
-def trainGraphSage(time_list, folder, data, class_num, label_file, time_index, config: Config):
+def trainGraphSage(time_data, time_list, folder, train_metric, test_metric, val_metric, class_num, label_file, time_index, config: Config):
     node_num = 0
     for t in time_list:
         node_num += t.count
 
-    return run_RCA(node_num, len(data.columns), data, time_data, time_list, data, class_num, label_file, time_index,
+    return run_RCA(node_num, len(train_metric.columns), time_data, time_list, train_metric, test_metric, val_metric, class_num, label_file, time_index,
                    folder, config)
 
 
-def rank(classification_count, root_cause_list, label_data, label_map_revert):
+def rank(classification_count, root_cause_list, label_map_revert):
     rank_list = {}
     for i, root_cause in enumerate(root_cause_list):
         total_value = 0
@@ -664,11 +663,48 @@ def rank(classification_count, root_cause_list, label_data, label_map_revert):
     return rank_list
 
 
+class Simple:
+    def __init__(self, label, begin, end):
+        self.label = label
+        self.begin = begin
+        self.end = end
+
+
+def read_label_logs(label_file, simple_list: [Simple], minute):
+    if simple_list is None:
+        simple_list = []
+    file_path = label_file
+    try:
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+            # 如果文件为空则跳过
+            if not lines:
+                return simple_list
+            for line in lines:
+                if 'cpu_' in line or 'mem_' in line or 'net_' in line:
+                    root_cause = line.strip()
+                    simple = Simple(root_cause, None, None)
+                elif 'start create' in line:
+                    begin = line[:18]
+                elif 'finish delete' in line:
+                    end = line[:18]
+                    simple.begin = timestamp_2_time_string(time_string_2_timestamp(begin) - 30 * (minute - 3))
+                    simple.end = timestamp_2_time_string(time_string_2_timestamp(end) + 30 * (minute - 3))
+                    simple_list.append(simple)
+    except Exception as e:
+        print(f"Error reading file {file_path}: {e}")
+
+
+class TMetric:
+    def __init__(self, tt: Time, metric: pd.DataFrame):
+        self.tt = tt
+        self.metric = metric
+
+
 if __name__ == '__main__':
 
-    folder_list = ['data/data1/1', 'data/data1/2']
-    data_list = ['2022-7-22 ', '2022-7-23 ']
-    label_file_list = ['20220722', '20220723']
+    folder_list = ['data/data3']
+    label_file_list = ['topoChange']
     i_t_pr_1 = 0
     i_t_pr_3 = 0
     i_t_pr_5 = 0
@@ -705,96 +741,178 @@ if __name__ == '__main__':
 
     config = Config()
     data_count = len(folder_list)
+    # params
+    minute = config.minute
+    alpha = config.alpha
+    instance_tolerant = config.instance_tolerant
+    service_tolerant = config.service_tolerant
+    train = config.is_train
+    candidate_count = config.candidate_count
+    # rate=1 means training all anomaly types, you can set 0 < rate <= 1, e.g., {0.8, 0.6, 0.4} mentioned in paper
+    rate = config.rate
+    # metrics sample time interval:5s
+    time_interval_minute = config.sample_interval
+    node_overflow = config.node_overflow
     for i in range(data_count):
         folder = folder_list[i]
-
-        # params
-        minute = config.minute
-        alpha = config.alpha
-        instance_tolerant = config.instance_tolerant
-        service_tolerant = config.service_tolerant
-        train = config.is_train
-        candidate_count = config.candidate_count
-        # rate=1 means training all anomaly types, you can set 0 < rate <= 1, e.g., {0.8, 0.6, 0.4} mentioned in paper
-        rate = config.rate
-        # metrics sample time interval:5s
-        time_interval_minute = config.sample_interval
-        node_overflow = config.node_overflow
-
-        # time_data
-        metric_source_data = pd.read_csv(folder + '/' + 'metric.csv')
-        metric_source_data = metric_source_data.fillna(0)
-        time_data = metric_source_data.iloc[:, 0:1]
-
-        # normalize
-        data_normalize = metric_source_data.iloc[:, 2:]
-        for cc, column in data_normalize.items():
-            x = np.array(column)
-            x = np.where(np.isnan(x), 0, x)
-            normalized_x = preprocessing.normalize([x])
-
-            X = normalized_x.reshape(-1, 1)
-            data_normalize[cc] = X
-
         # read root_causes
-        label_file_name = folder + '/' + 'label' + '.csv'
-        label_data = pd.read_csv(label_file_name, encoding='utf-8')
+        label_file_name = folder + '/' + 'label' + '.txt'
+        simple_list: [Simple] = []
+        read_label_logs(label_file_name, simple_list, minute)
         label_set = set()
         label_revert_set = set()
         label_map = {}
         label_map_revert = {}
-        for index, raw in label_data.iterrows():
-            label_set.add(raw['cmdb_id'] + raw['failure_description'])
-            label_revert_set.add(raw['cmdb_id'] + '&' + raw['failure_description'])
+        for simple in simple_list:
+            label_set.add(simple.label[:simple.label.index('_')+4])
         label_list = sorted(list(label_set))
         for label in list(label_set):
             label_map[label] = label_list.index(label)
-            label_revert = None
-            for l in label_revert_set:
-                if l[:l.index('&')] in label and l[l.index('&') + 1:] in label:
-                    label_revert = l
-                    break
-            if label_revert is not None:
-                label_map_revert[label_list.index(label)] = label_revert
+            label_map_revert[label_list.index(label)] = label
         class_num = len(label_set)
-        root_causes = label_data['cmdb_id']
 
-        time_list = []
+        label_sampling_map = {}
+        for simple in simple_list:
+            failure = simple.label[:simple.label.index('_')+4]
+            if failure not in label_sampling_map:
+                label_sampling_map[failure] = [simple.label]
+            else:
+                label_sampling_map[failure].append(simple.label)
+        training_sampling_map = {}
+        test_sampling_map = {}
+        val_sampling_map = {}
+        training_labels = []
+        test_labels = []
+        val_labels = []
+        for key in label_sampling_map:
+            random.shuffle(label_sampling_map[key])
+            training_labels_key = label_sampling_map[key][:int(config.train_rate * len(label_sampling_map[key]))]
+            training_sampling_map[key] = training_labels_key
+            for trl in training_labels_key:
+                training_labels.append(trl)
+            test_labels_key = label_sampling_map[key][int(config.train_rate * len(label_sampling_map[key])):int((config.train_rate + config.test_rate) * len(label_sampling_map[key]))]
+            test_sampling_map[key] = test_labels_key
+            for tl in test_labels_key:
+                test_labels.append(tl)
+            val_labels_key = label_sampling_map[key][int((config.train_rate + config.test_rate) * len(label_sampling_map[key])):]
+            val_sampling_map[key] = val_labels_key
+            for vl in val_labels_key:
+                val_labels.append(vl)
 
-        j = 0
-        for row in label_data.itertuples():
-            root_cause = row[3]
-            root_cause_level = row[2]
-            real_time = data_list[i] + row[1]
-            real_timestamp = int(time.mktime(time.strptime(real_time, "%Y-%m-%d %H:%M:%S")))
-            begin_timestamp = real_timestamp - 30 * minute
-            end_timestamp = real_timestamp + 30 * minute
-            failure_type = row[4]
-            lb = label_map[root_cause + str(row[5])]
-            t = Time(begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type, lb, j + 1)
-            time_list.append(t)
-            j += 1
+        train_metric_source_data = pd.DataFrame()
+        test_metric_source_data = pd.DataFrame()
+        val_metric_source_data = pd.DataFrame()
+        for dir in os.listdir(folder):
+            if os.path.isdir(folder + '/' + dir):
+                metric_data_single = pd.read_csv(folder + '/' + dir + '/bookinfo/instance.csv')
+                if dir in training_labels:
+                    if train_metric_source_data.empty:
+                        train_metric_source_data = metric_data_single
+                    else:
+                        train_metric_source_data = pd.concat([train_metric_source_data, metric_data_single])
+                    train_metric_source_data = train_metric_source_data.fillna(-1)
+                if dir in test_labels:
+                    if test_metric_source_data.empty:
+                        test_metric_source_data = metric_data_single
+                    else:
+                        test_metric_source_data = pd.concat([test_metric_source_data, metric_data_single])
+                    test_metric_source_data = test_metric_source_data.fillna(-1)
+                if dir in val_labels:
+                    if val_metric_source_data.empty:
+                        val_metric_source_data = metric_data_single
+                    else:
+                        val_metric_source_data = pd.concat([val_metric_source_data, metric_data_single])
+                    val_metric_source_data = val_metric_source_data.fillna(-1)
+        train_metric_source_data = train_metric_source_data.sort_values(by='timestamp')
+        train_metric_source_data = train_metric_source_data.reset_index(drop=True)
+        test_metric_source_data = test_metric_source_data.sort_values(by='timestamp')
+        test_metric_source_data = test_metric_source_data.reset_index(drop=True)
+        val_metric_source_data = val_metric_source_data.sort_values(by='timestamp')
+        val_metric_source_data = val_metric_source_data.reset_index(drop=True)
 
-        for ti, row in time_data.iterrows():
-            for j, t in enumerate(time_list):
-                t.in_time(int(time_data[ti:ti + 1]['timestamp']), ti)
+        # time_data
+        train_time_data = train_metric_source_data.iloc[:, 0:1]
+        test_time_data = test_metric_source_data.iloc[:, 0:1]
+        val_time_data = val_metric_source_data.iloc[:, 0:1]
+
+        # normalize
+        def normalize(metric_source_data):
+            for cc, column in metric_source_data.items():
+                x = np.array(column)
+                valid_rows = np.where(x != -1)
+
+                # 仅保留不含 -1 值的行进行归一化
+                valid_data = x[valid_rows]
+                normalized_data = preprocessing.normalize([valid_data])
+
+                # 将归一化后的数据还原到原始数据中
+                x[valid_rows] = normalized_data[0].reshape(-1, 1).T[0]
+                # normalized_x = preprocessing.normalize([x])
+
+                metric_source_data[cc] = x
+            return metric_source_data
+
+        train_metric_data_normalize = normalize(train_metric_source_data.iloc[:, 1:])
+        test_metric_data_normalize = normalize(test_metric_source_data.iloc[:, 1:])
+        val_metric_data_normalize = normalize(val_metric_source_data.iloc[:, 1:])
+
+        # combine columns
+        combine_columns = list(set(test_metric_data_normalize).union(set(train_metric_data_normalize)).union(set(val_metric_data_normalize)))
+        combine_columns.append('timestamp')
+
+        def combine_miss_columns(data_normalize):
+            miss_columns = list(set(combine_columns).difference(set(data_normalize.columns)))
+            for miss_column in miss_columns:
+                data_normalize[miss_column] = -1
+
+        combine_miss_columns(train_metric_data_normalize)
+        combine_miss_columns(test_metric_data_normalize)
+        combine_miss_columns(val_metric_data_normalize)
+
+        def time_list(simples_label, time_data):
+            j = 0
+            tt_list = []
+            for sl in simples_label:
+                root_cause = sl.label[:sl.label.index('_')]
+                root_cause_level = 'pod'
+                begin_timestamp = time_string_2_timestamp(sl.begin)
+                end_timestamp = time_string_2_timestamp(sl.end)
+                failure_type = sl.label[:sl.label.index('_')+4]
+                lb = label_map[failure_type]
+                t = Time(begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type, lb, j + 1)
+                tt_list.append(t)
+                j += 1
+            for ti, row in time_data.iterrows():
+                for t in tt_list:
+                    t.in_time(time_string_2_timestamp_utc(row['timestamp']), ti)
+            return tt_list
+
+        train_simples = [simple for simple in simple_list if simple.label in training_labels]
+        test_simples = [simple for simple in simple_list if simple.label in test_labels]
+        val_simples = [simple for simple in simple_list if simple.label in val_labels]
+        train_time_list = time_list(train_simples, train_time_data)
+        test_time_list = time_list(test_simples, test_time_data)
+        val_time_list = time_list(val_simples, val_time_data)
+
+        val_t_metrics = [TMetric(val_time, val_metric_data_normalize) for val_time in val_time_list]
+        test_t_metrics = [TMetric(te_time, test_metric_data_normalize) for te_time in test_time_list]
 
         time_index = []
 
         if 0 < rate < 1:
             if train:
-                random.shuffle(time_list)
-                time_list_shuffle = time_list[0:int(len(time_list) * rate)]
+                random.shuffle(train_time_list)
+                time_list_shuffle = train_time_list[0:int(len(train_time_list) * rate)]
                 time_index = [t.index for t in time_list_shuffle]
             else:
                 # input the index of model file suffix separated by "."
                 # time_index = []
-                time_list_shuffle = [t for t in time_list if t.index in time_index]
+                time_list_shuffle = [t for t in train_time_list if t.index in time_index]
         else:
-            time_list_shuffle = time_list
+            time_list_shuffle = train_time_list
 
         # train GNN
-        graphsage = trainGraphSage(time_list_shuffle, folder, data_normalize, class_num, label_file_list[i], time_index,
+        graphsage = trainGraphSage(train_time_data, time_list_shuffle, folder, train_metric_data_normalize, test_t_metrics, val_t_metrics, class_num, label_file_list[i], time_index,
                                    config)
 
         # build svc call
@@ -818,7 +936,7 @@ if __name__ == '__main__':
         acc_count = 0
         acc_ablation = 0
         acc_ablation_count = 0
-        for t in time_list:
+        for t in train_time_list:
             root_cause = t.root_cause
             root_cause_level = t.root_cause_level
             begin_timestamp = t.begin
@@ -893,9 +1011,9 @@ if __name__ == '__main__':
             val = []
             val_overflow = []
             for i in range(max(0, t.begin_index - node_overflow),
-                           min(t.end_index + 1 + node_overflow, metric_source_data.index.max())): val_overflow.append(i)
+                           min(t.end_index + 1 + node_overflow, train_metric_source_data.index.max())): val_overflow.append(i)
             for i in range(t.begin_index, t.end_index + 1): val.append(i)
-            val_output = graphsage.forward(val, data_normalize, is_node_train_index=False)
+            val_output = graphsage.forward(val, train_metric_data_normalize, is_node_train_index=False)
             classification = val_output.data.numpy().argmax(axis=1)
 
             classification_count = {}
@@ -908,7 +1026,7 @@ if __name__ == '__main__':
                                           key=lambda x: x[1], reverse=True)
 
             # Calculate the ranking results
-            rank_list = rank(classification_count, root_cause_list, label_data, label_map_revert)
+            rank_list = rank(classification_count, root_cause_list, label_map_revert)
             rank_list = sorted(rank_list.items(),
                                key=lambda x: x[1], reverse=True)
             print('MicroIRC Top K:')

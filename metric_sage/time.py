@@ -14,10 +14,12 @@ class Time:
 
     def in_time(self, time, index):
         is_in_time = False
-        if time >= self.begin and time <= self.end:
+        if time >= self.begin and time < self.end:
             if self.begin_index == -1:
                 self.begin_index = index
-            self.end_index = index
+                self.end_index = index
+            if index > self.end_index:
+                self.end_index = index
             is_in_time = True
-        self.count = self.end_index - self.begin_index + 1
+            self.count = self.end_index - self.begin_index + 1
         return is_in_time

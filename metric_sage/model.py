@@ -24,6 +24,7 @@ from metric_sage.index_map import IndexMap
 from metric_sage.index_map import index_map
 from metric_sage.Config import Config
 import wandb
+from util import *
 
 """
 Simple supervised GraphSAGE model as well as examples running the model
@@ -88,9 +89,10 @@ def load_RCA_with_label(node_num, feat_num, df, time_data, time_list):
     index_map_list = []
     for i,row in df.iterrows():
         for j, time in enumerate(time_list):
-            if time.in_time(int(time_data[i:i+1]['timestamp']), i):
+            ts = time_string_2_timestamp_utc(time_data['timestamp'][i])
+            if time.in_time(ts, i):
                 labels[count] = time.label
-                feat_data[count, :] = df[i:i+1]
+                feat_data[count, :] = row
                 index_map_list.append(IndexMap(count, i))
                 count += 1
 
@@ -105,17 +107,17 @@ def load_RCA_with_label(node_num, feat_num, df, time_data, time_list):
 
     return feat_data, labels, adj_lists, index_map_list
 
-def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, label_file, time_index, folder, config: Config):
+def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric, val_metric, class_num, label_file, time_index, folder, config: Config):
     np.random.seed(1)
     random.seed(1)
     num_nodes = node_num
-    feat_data, labels, adj_lists, index_map_list = load_RCA_with_label(node_num, feat_num, df, time_data, time_list)
+    feat_data, labels, adj_lists, index_map_list = load_RCA_with_label(node_num, feat_num, train_metric, time_data, time_list)
 
-    agg1 = MeanAggregator(config, 'agg1', None, metric, index_map_list, feat_num, 64, cuda=config.cuda)
-    enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, metric, index_map_list, gcn=True, cuda=config.cuda)
-    agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), metric, index_map_list, feat_num, 32, cuda=config.cuda)
-    enc2 = Encoder(config, 'enc2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), enc1.embed_dim, class_num, adj_lists, agg2, metric, index_map_list,
-            base_model=enc1, gcn=True, cuda=config.cuda)
+    agg1 = MeanAggregator(config, 'agg1', None, train_metric, index_map_list, feat_num, 64, cuda=config.cuda)
+    enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, train_metric, index_map_list, gcn=True, cuda=config.cuda)
+    agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), train_metric, index_map_list, feat_num, 32, cuda=config.cuda)
+    enc2 = Encoder(config, 'enc2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), enc1.embed_dim, class_num, adj_lists, agg2, train_metric, index_map_list,
+                   base_model=enc1, gcn=True, cuda=config.cuda)
     
     # train parameters
     epochs = config.epochs
@@ -125,11 +127,17 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
     if config.cuda:
         graphsage = graphsage.cuda()
     rand_indices = np.random.permutation(num_nodes)
-    division = int(len(rand_indices) / 10)
-    test = rand_indices[:division]
-    val = rand_indices[division:2 * division]
-    train = list(rand_indices[2 * division:])
+    train = list(rand_indices)
     batch_size = config.batch_size
+
+    val = []
+    val_labels = []
+    for v in val_metric:
+        t = v.tt
+        for i in range(t.begin_index, t.end_index + 1):
+            val.append(i)
+            val_labels.append(t.label)
+
     # model diy name
     # suffix_diy = "data_modify"
     suffix_diy = ""
@@ -160,8 +168,8 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
                 random.shuffle(train)
                 start_time = time.time()
                 optimizer.zero_grad()
-                loss = graphsage.loss(batch_nodes, metric.loc[index_map(batch_nodes, index_map_list)],
-                        Variable(torch.LongTensor(labels[np.array(batch_nodes)])))
+                loss = graphsage.loss(batch_nodes, train_metric.loc[index_map(batch_nodes, index_map_list)],
+                                      Variable(torch.LongTensor(labels[np.array(batch_nodes)])))
                 loss.backward()
                 optimizer.step()
                 end_time = time.time()
@@ -171,8 +179,8 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
                     wandb.log({"loss": loss})
                     wandb.watch(graphsage)
 
-        val_output = graphsage.forward(val, metric.loc[index_map(val, index_map_list)], True) 
-        print("Validation F1:", f1_score(labels[val], val_output.data.numpy().argmax(axis=1), average="micro"))
+        val_output = graphsage.forward(val, val_metric.loc[val], False)
+        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
         print("Average batch time:", np.mean(times))
         _dir = folder + "/model"
         if not os.path.exists(_dir):
@@ -182,8 +190,8 @@ def run_RCA(node_num, feat_num, df, time_data, time_list, metric, class_num, lab
     else:
         trained_model = SupervisedGraphSage(class_num, enc2)
         trained_model.load_state_dict(torch.load(folder + "/model/model_parameters_" + suffix + ".pkl"))
-        val_output = trained_model.forward(val, metric.loc[index_map(val, index_map_list)], True)
-        print("Validation F1:", f1_score(labels[val], val_output.data.numpy().argmax(axis=1), average="micro"))
+        val_output = trained_model.forward(val, val_metric.loc[val], False)
+        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
         return trained_model
 
 

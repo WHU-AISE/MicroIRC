@@ -6,6 +6,8 @@
 
 from sklearn import base, preprocessing
 import pandas as pd
+import pytz
+from datetime import datetime, timezone
 
 
 def formalize(data):
@@ -66,3 +68,38 @@ def df_time_limit(df, begin_timestamp, end_timestamp):
 
 def df_time_limit_normalization(df, begin_timestamp, end_timestamp):
     return normalize_dataframe(df_time_limit(df, begin_timestamp, end_timestamp).fillna(0))
+
+
+def time_string_2_timestamp(time_string):
+    # 设置北京时区
+    beijing_tz = pytz.timezone('Asia/Shanghai')
+
+    # 将时间字符串转换为 datetime 对象
+    dt_object = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S')
+
+    # 将 datetime 对象转换为北京时间
+    dt_object = beijing_tz.localize(dt_object)
+
+    # 使用 timestamp() 将 datetime 对象转换为时间戳
+    return int(dt_object.timestamp())
+
+
+def time_string_2_timestamp_utc(time_string):
+    # 将时间字符串转换为 datetime 对象
+    dt_object = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S')
+
+    # 使用 timestamp() 将 datetime 对象转换为时间戳
+    return int(dt_object.replace(tzinfo=timezone.utc).timestamp())
+
+
+def timestamp_2_time_string(timestamp):
+    # 设置北京时区
+    beijing_tz = pytz.timezone('Asia/Shanghai')
+
+    # 将时间戳转换为 datetime 对象
+    dt_object = datetime.utcfromtimestamp(timestamp).replace(tzinfo=pytz.utc)
+
+    # 将 datetime 对象转换为北京时间
+    dt_object = dt_object.astimezone(beijing_tz)
+
+    return dt_object.strftime("%Y-%m-%d %H:%M:%S")
