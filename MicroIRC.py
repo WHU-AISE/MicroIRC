@@ -1014,7 +1014,7 @@ if __name__ == '__main__':
                            min(t.end_index + 1 + node_overflow, train_metric_source_data.index.max())): val_overflow.append(i)
             for i in range(t.begin_index, t.end_index + 1): val.append(i)
             val_output = graphsage.forward(val, train_metric_data_normalize, is_node_train_index=False)
-            classification = val_output.data.numpy().argmax(axis=1)
+            classification = val_output.data.cpu().numpy().argmax(axis=1)
 
             classification_count = {}
             for c in classification:
