@@ -1,6 +1,7 @@
 class Time:
 
-    def __init__(self, begin_time, end_time, root_cause, root_cause_level, failure_type, label, index):
+    def __init__(self, simple, begin_time, end_time, root_cause, root_cause_level, failure_type, label, index):
+        self.simple = simple
         self.begin = begin_time
         self.end = end_time
         self.begin_index = -1
