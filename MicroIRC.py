@@ -767,6 +767,7 @@ if __name__ == '__main__':
         for simple in simple_list:
             label_set.add(simple.label[:simple.label.index('_')+4])
             root_cause_services.append(simple.label[:simple.label.index('_')])
+        root_cause_services = list(set(root_cause_services))
         label_list = sorted(list(label_set))
         for label in list(label_set):
             label_map[label] = label_list.index(label)
