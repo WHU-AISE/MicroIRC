@@ -114,7 +114,7 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
     num_nodes = node_num
     feat_data, labels, adj_lists, index_map_list = load_RCA_with_label(node_num, feat_num, train_metric, time_data, time_list)
 
-    instances_pooling = InstancesPooling(config, 'instance_pooling1', node_num, feat_num)
+    instances_pooling = InstancesPooling(config, 'instance_pooling1', node_num, feat_num, config.cuda)
     agg1 = MeanAggregator(config, 'agg1', None, train_metric, index_map_list, feat_num, 64, cuda=config.cuda, instances_pooling=instances_pooling)
     enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, train_metric, index_map_list, gcn=True, cuda=config.cuda)
     agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), train_metric, index_map_list, feat_num, 32, cuda=config.cuda)
