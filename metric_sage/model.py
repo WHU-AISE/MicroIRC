@@ -19,6 +19,7 @@ from collections import defaultdict
 
 from metric_sage.encoders import Encoder
 from metric_sage.aggregators import MeanAggregator
+from metric_sage.instances_pooling import InstancesPooling
 import pandas as pd
 from metric_sage.index_map import IndexMap
 from metric_sage.index_map import index_map
@@ -113,7 +114,8 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
     num_nodes = node_num
     feat_data, labels, adj_lists, index_map_list = load_RCA_with_label(node_num, feat_num, train_metric, time_data, time_list)
 
-    agg1 = MeanAggregator(config, 'agg1', None, train_metric, index_map_list, feat_num, 64, cuda=config.cuda)
+    instances_pooling = InstancesPooling(config, 'instance_pooling1', node_num, feat_num)
+    agg1 = MeanAggregator(config, 'agg1', None, train_metric, index_map_list, feat_num, 64, cuda=config.cuda, instances_pooling=instances_pooling)
     enc1 = Encoder(config, 'enc1', None, 64, 32, adj_lists, agg1, train_metric, index_map_list, gcn=True, cuda=config.cuda)
     agg2 = MeanAggregator(config, 'agg2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), train_metric, index_map_list, feat_num, 32, cuda=config.cuda)
     enc2 = Encoder(config, 'enc2', lambda nodes, metric, is_train_index: enc1(nodes, metric, is_train_index).t(), enc1.embed_dim, class_num, adj_lists, agg2, train_metric, index_map_list,
@@ -134,9 +136,10 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
     val_labels = []
     for v in val_metric:
         t = v.tt
-        for i in range(t.begin_index, t.end_index + 1):
-            val.append(i)
-            val_labels.append(t.label)
+        if t.begin_index != -1:
+            for i in range(t.begin_index, t.end_index + 1):
+                val.append(i)
+                val_labels.append(t.label)
 
     # model diy name
     # suffix_diy = "data_modify"
@@ -179,20 +182,25 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
                     wandb.log({"loss": loss})
                     wandb.watch(graphsage)
 
-        val_output = graphsage.forward(val, val_metric, False)
-        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
         print("Average batch time:", np.mean(times))
         _dir = folder + "/model"
         if not os.path.exists(_dir):
             os.makedirs(_dir)
         torch.save(graphsage.state_dict(), _dir + "/model_parameters_" + suffix + ".pkl")
-        return graphsage
     else:
-        trained_model = SupervisedGraphSage(class_num, enc2)
-        trained_model.load_state_dict(torch.load(folder + "/model/model_parameters_" + suffix + ".pkl"))
-        val_output = trained_model.forward(val, val_metric, False)
-        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
-        return trained_model
+        graphsage.load_state_dict(torch.load(folder + "/model/model_parameters_" + suffix + ".pkl"))
+    f1_score_val = 0
+    f1_count = 0
+    for v in val_metric:
+        t = v.tt
+        if t.begin_index != -1:
+            val_output = graphsage.forward([i for i in range(t.begin_index, t.end_index + 1)], v.metric, False)
+            f1_ = f1_score([t.label for i in range(t.begin_index, t.end_index + 1)], val_output.data.numpy().argmax(axis=1), average="micro")
+            print(f"Validation F1: {f1_} with label {t.label}")
+            f1_score_val += f1_
+            f1_count += 1
+    print(f"Validation F1: {str(f1_score_val / f1_count)}")
+    return graphsage
 
 
 if __name__ == "__main__":
