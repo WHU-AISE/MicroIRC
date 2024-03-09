@@ -181,8 +181,8 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
                     wandb.log({"loss": loss})
                     wandb.watch(graphsage)
 
-        val_output = graphsage.forward(val, val_metric.loc[val], False)
-        print("Validation F1:", f1_score(val_labels, val_output.data.cpu().numpy().argmax(axis=1), average="micro"))
+        val_output = graphsage.forward(val, val_metric, False)
+        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
         print("Average batch time:", np.mean(times))
         _dir = folder + "/model"
         if not os.path.exists(_dir):
@@ -192,8 +192,8 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
     else:
         trained_model = SupervisedGraphSage(class_num, enc2)
         trained_model.load_state_dict(torch.load(folder + "/model/model_parameters_" + suffix + ".pkl"))
-        val_output = trained_model.forward(val, val_metric.loc[val], False)
-        print("Validation F1:", f1_score(val_labels, val_output.data.cpu().numpy().argmax(axis=1), average="micro"))
+        val_output = trained_model.forward(val, val_metric, False)
+        print("Validation F1:", f1_score(val_labels, val_output.data.numpy().argmax(axis=1), average="micro"))
         return trained_model
 
 

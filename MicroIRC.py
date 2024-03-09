@@ -879,7 +879,7 @@ if __name__ == '__main__':
                 end_timestamp = time_string_2_timestamp(sl.end)
                 failure_type = sl.label[:sl.label.index('_')+4]
                 lb = label_map[failure_type]
-                t = Time(begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type, lb, j + 1)
+                t = Time(sl, begin_timestamp, end_timestamp, root_cause, root_cause_level, failure_type, lb, j + 1)
                 tt_list.append(t)
                 j += 1
             for ti, row in time_data.iterrows():
@@ -915,14 +915,6 @@ if __name__ == '__main__':
         graphsage = trainGraphSage(train_time_data, time_list_shuffle, folder, train_metric_data_normalize, test_t_metrics, val_t_metrics, class_num, label_file_list[i], time_index,
                                    config)
 
-        # build svc call
-        call_file_name = folder + '/' + 'call.csv'
-        call_data = pd.read_csv(call_file_name)
-        call_set = []
-        for head in call_data.columns:
-            if 'timestamp' in head: continue
-            call_set.append(head[:head.find('&')])
-
         # ablation result
         nums_ablation = []
         svc_nums_ablation = []
@@ -936,7 +928,18 @@ if __name__ == '__main__':
         acc_count = 0
         acc_ablation = 0
         acc_ablation_count = 0
-        for t in train_time_list:
+        for t_metrics in test_t_metrics:
+            t = t_metrics.tt
+            sb = t.simple
+            label_folder = folder + '/' + sb.label + '/bookinfo/'
+            # build svc call
+            call_file_name = label_folder + 'call.csv'
+            call_data = pd.read_csv(call_file_name)
+            call_set = []
+            for head in call_data.columns:
+                if 'timestamp' in head: continue
+                call_set.append(head[:head.find('&')])
+
             root_cause = t.root_cause
             root_cause_level = t.root_cause_level
             begin_timestamp = t.begin
@@ -950,22 +953,22 @@ if __name__ == '__main__':
             instances = getInstancesName(file_dir)
 
             # read latency data
-            latency = pd.read_csv(file_dir + '/' + 'call.csv')
+            latency = pd.read_csv(label_folder + 'latency.csv')
 
             # qps data
-            qps_file_name = file_dir + '/' + 'svc_qps.csv'
+            qps_file_name = label_folder + 'svc_qps.csv'
             qps_source_data = pd.read_csv(qps_file_name)
             qps_source_data = dfTimelimit(qps_source_data, begin_timestamp, end_timestamp)
             anomalie_instances = birch_ad_with_smoothing(qps_source_data, instance_tolerant)
 
             # success rate data
-            success_rate_file_name = file_dir + '/' + 'success_rate.csv'
+            success_rate_file_name = label_folder + 'success_rate.csv'
             success_rate_source_data = pd.read_csv(success_rate_file_name)
             success_rate_source_data = dfTimelimit(success_rate_source_data, begin_timestamp, end_timestamp)
             anomalie_instances += birch_ad_with_smoothing(success_rate_source_data, instance_tolerant)
 
             # node data
-            node_file_name = file_dir + '/' + 'node.csv'
+            node_file_name = folder + '/' + sb.label + '/node/node.csv'
             node_source_data = pd.read_csv(node_file_name)
             for head in node_source_data.columns:
                 if 'node' not in head:
@@ -1008,12 +1011,12 @@ if __name__ == '__main__':
             root_cause_list = list(map(lambda p: p[0], anomaly_score))
             root_cause_list = getCandidateList(root_cause_list, candidate_count, svc_instances_map, instance_svc_map,
                                                DG)
-            val = []
-            val_overflow = []
-            for i in range(max(0, t.begin_index - node_overflow),
-                           min(t.end_index + 1 + node_overflow, train_metric_source_data.index.max())): val_overflow.append(i)
-            for i in range(t.begin_index, t.end_index + 1): val.append(i)
-            val_output = graphsage.forward(val, train_metric_data_normalize, is_node_train_index=False)
+            test = []
+            test_labels = []
+            for i in range(t.begin_index, t.end_index + 1):
+                test.append(i)
+                test_labels.append(t.label)
+            val_output = graphsage.forward(test, test_metric_data_normalize, is_node_train_index=False)
             classification = val_output.data.cpu().numpy().argmax(axis=1)
 
             classification_count = {}
