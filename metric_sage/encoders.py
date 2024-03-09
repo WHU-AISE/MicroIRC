@@ -51,8 +51,7 @@ class Encoder(nn.Module):
             if is_node_train_index:
                 neigh_nodes.append(self.adj_lists[int(node)])
             else:
-                neigh_nodes.append({i for i in range(max(0, int(node) - true_neighbor_value),
-                                                     min(int(node) + true_neighbor_value, metric.index.max()))})
+                neigh_nodes.append({i for i in range(node, max(nodes) + 1)})
         # metric within neigh_nodes
         neigh_feats = self.aggregator.forward(nodes, neigh_nodes, metric, is_node_train_index)
         if self.features:

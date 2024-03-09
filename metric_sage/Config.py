@@ -29,3 +29,5 @@ class Config:
         self.epoch_size = epoch_size
         self.train_rate = train_rate
         self.test_rate = test_rate
+        self.root_cause_service_2_columns = None
+        self.combine_columns_index_map = None

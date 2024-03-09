@@ -763,8 +763,10 @@ if __name__ == '__main__':
         label_revert_set = set()
         label_map = {}
         label_map_revert = {}
+        root_cause_services = []
         for simple in simple_list:
             label_set.add(simple.label[:simple.label.index('_')+4])
+            root_cause_services.append(simple.label[:simple.label.index('_')])
         label_list = sorted(list(label_set))
         for label in list(label_set):
             label_map[label] = label_list.index(label)
@@ -803,7 +805,7 @@ if __name__ == '__main__':
         test_metric_source_data = pd.DataFrame()
         val_metric_source_data = pd.DataFrame()
         for dir in os.listdir(folder):
-            if os.path.isdir(folder + '/' + dir):
+            if dir != 'model' and os.path.isdir(folder + '/' + dir):
                 metric_data_single = pd.read_csv(folder + '/' + dir + '/bookinfo/instance.csv')
                 if dir in training_labels:
                     if train_metric_source_data.empty:
@@ -859,15 +861,28 @@ if __name__ == '__main__':
         # combine columns
         combine_columns = list(set(test_metric_data_normalize).union(set(train_metric_data_normalize)).union(set(val_metric_data_normalize)))
         combine_columns.append('timestamp')
+        combine_columns_index = {c: k for k, c in enumerate(combine_columns)}
+        combine_columns_index_map = {k: c for k, c in enumerate(combine_columns)}
+        config.combine_columns_index_map = combine_columns_index_map
+        root_cause_service_2_columns = {}
+        for rs in root_cause_services:
+            for cic in combine_columns:
+                if rs in cic:
+                    if rs not in root_cause_service_2_columns:
+                        root_cause_service_2_columns[rs] = [combine_columns.index(cic)]
+                    else:
+                        root_cause_service_2_columns[rs].append(combine_columns.index(cic))
+        config.root_cause_service_2_columns = root_cause_service_2_columns
 
-        def combine_miss_columns(data_normalize):
+        def combine_miss_columns(data_normalize, cc):
             miss_columns = list(set(combine_columns).difference(set(data_normalize.columns)))
             for miss_column in miss_columns:
                 data_normalize[miss_column] = -1
+            return data_normalize.reindex(columns=cc)
 
-        combine_miss_columns(train_metric_data_normalize)
-        combine_miss_columns(test_metric_data_normalize)
-        combine_miss_columns(val_metric_data_normalize)
+        train_metric_data_normalize = combine_miss_columns(train_metric_data_normalize, combine_columns)
+        test_metric_data_normalize = combine_miss_columns(test_metric_data_normalize, combine_columns)
+        val_metric_data_normalize = combine_miss_columns(val_metric_data_normalize, combine_columns)
 
         def time_list(simples_label, time_data):
             j = 0
@@ -950,7 +965,7 @@ if __name__ == '__main__':
             anomaly_source = root_cause
             file_dir = folder
             # collect instance names
-            instances = getInstancesName(file_dir)
+            instances = getInstancesName(label_folder)
 
             # read latency data
             latency = pd.read_csv(label_folder + 'latency.csv')

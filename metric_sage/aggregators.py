@@ -19,7 +19,7 @@ class MeanAggregator(nn.Module):
     """
 
     def __init__(self, config: Config, name, features, metric, index_map_list, feature_num, embed_num, cuda=False,
-                 gcn=False):
+                 gcn=False, instances_pooling=None):
         """
         Initializes the aggregator for a specific graph.
 
@@ -40,6 +40,7 @@ class MeanAggregator(nn.Module):
         self.embed_num = embed_num
         self.feature_num = feature_num
         self.fc1 = nn.Linear(feature_num, embed_num)
+        self.instances_pooling = instances_pooling
 
     def flattenlist(self, _2dlist):
         # defining an empty list
@@ -104,15 +105,18 @@ class MeanAggregator(nn.Module):
                 embed_matrix = self.features(torch.LongTensor(unique_nodes_list), metric, is_node_train_index)
         else:
             if is_node_train_index:
+                source_metric = torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values))
+                source_metric[source_metric == -1] = 0
                 if self.cuda:
-                    embed_matrix = self.fc(
-                        torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)).cuda())
+                    embed_matrix = self.fc(self.instances_pooling(source_metric.cuda()))
                 else:
-                    embed_matrix = self.fc(torch.from_numpy(np.float32(self.metric.loc[true_unique_nodes_list].values)))
+                    embed_matrix = self.fc(self.instances_pooling(source_metric))
             else:
+                source_metric = torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values))
+                source_metric[source_metric == -1] = 0
                 if self.cuda:
-                    embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values)).cuda())
+                    embed_matrix = self.fc(self.instances_pooling(source_metric.cuda()))
                 else:
-                    embed_matrix = self.fc(torch.from_numpy(np.float32(metric.loc[unique_nodes_list].values)))
+                    embed_matrix = self.fc(self.instances_pooling(source_metric))
         to_feats = mask.mm(embed_matrix)
         return F.relu(to_feats)
