@@ -197,7 +197,7 @@ def run_RCA(node_num, feat_num, time_data, time_list, train_metric, test_metric,
         t = v.tt
         if t.begin_index != -1:
             val_output = graphsage.forward([i for i in range(t.begin_index, t.end_index + 1)], v.metric, False)
-            f1_ = f1_score([t.label for i in range(t.begin_index, t.end_index + 1)], val_output.data.numpy().argmax(axis=1), average="micro")
+            f1_ = f1_score([t.label for i in range(t.begin_index, t.end_index + 1)], val_output.data.cpu().numpy().argmax(axis=1), average="micro")
             print(f"Validation F1: {f1_} with label {t.label}")
             f1_score_val += f1_
             f1_count += 1
