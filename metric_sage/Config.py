@@ -3,9 +3,9 @@ import torch
 
 
 class Config:
-    def __init__(self, is_train=True, time_window_minutes=10,
+    def __init__(self, is_train=False, time_window_minutes=10,
                  sample_interval=1 / 12, num_sample=10, batch_size=120,
-                 epochs=10000, learning_rate=0.01, minute=10, alpha=0.8,
+                 epochs=2000, learning_rate=0.1, minute=10, alpha=0.8,
                  instance_tolerant=0.01, service_tolerant=0.03, candidate_count=10,
                  rate=1, epoch_size=1, train_rate=0.8, test_rate=0.1):
         self.is_train = is_train
@@ -31,3 +31,5 @@ class Config:
         self.test_rate = test_rate
         self.root_cause_service_2_columns = None
         self.combine_columns_index_map = None
+        self.svc_set = set()
+        self.pod_set = set()

@@ -24,8 +24,7 @@ class InstancesPooling(nn.Module):
             self.service_pooling_map[service] = service_pooling
 
     def fc(self, x):
-        relu = nn.ReLU()
-        return relu(self.fc1(x))
+        return self.fc1(x)
 
     def forward(self, metric):
         tensor_index_map = self.config.combine_columns_index_map
