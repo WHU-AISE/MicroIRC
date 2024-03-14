@@ -958,6 +958,7 @@ if __name__ == '__main__':
         combine_columns = list(set(test_metric_data_normalize).union(set(train_metric_data_normalize)).union(
             set(val_metric_data_normalize)))
         combine_columns.append('timestamp')
+        combine_columns = sorted(combine_columns)
         combine_columns_index = {c: k for k, c in enumerate(combine_columns)}
         combine_columns_index_map = {k: c for k, c in enumerate(combine_columns)}
         config.combine_columns_index_map = combine_columns_index_map
