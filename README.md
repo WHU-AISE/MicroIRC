@@ -13,7 +13,7 @@
 
 ### data
 
-contains dataset C
+contains dataset *C* in the main branch and dataset *E* in the topoChange branch.
 
 ### model
 
@@ -35,6 +35,14 @@ python 3.10
 
 ```shell
 git clone https://github.com/WHU-AISE/MicroIRC.git
+```
+
+### TopoChange
+
+The branch topoChange contains the extension of MetricSage for dynamic changes in topology and dataset *E*.
+
+```shell
+git checkout topoChange
 ```
 
 ### Install Dependencies
