@@ -1,0 +1,2204 @@
+details_cpu_load_1
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 15:37:12 start create.
+2024-03-05 15:38:12 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 15:40:12 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 15:40:12 finish delete.
+2024-03-05 15:41:12 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 15:52:13 start create.
+2024-03-05 15:53:13 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 15:55:13 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 15:55:13 finish delete.
+2024-03-05 15:56:13 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 16:07:14 start create.
+2024-03-05 16:08:14 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 16:10:14 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 16:10:14 finish delete.
+2024-03-05 16:11:14 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 16:22:14 start create.
+2024-03-05 16:23:14 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 16:25:14 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 16:25:14 finish delete.
+2024-03-05 16:26:14 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 16:37:15 start create.
+2024-03-05 16:38:15 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 16:40:15 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 16:40:15 finish delete.
+2024-03-05 16:41:15 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 16:52:16 start create.
+2024-03-05 16:53:16 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 16:55:16 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 16:55:16 finish delete.
+2024-03-05 16:56:16 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 17:07:16 start create.
+2024-03-05 17:08:16 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 17:10:16 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 17:10:17 finish delete.
+2024-03-05 17:11:17 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 17:22:17 start create.
+2024-03-05 17:23:17 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 17:25:17 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 17:25:17 finish delete.
+2024-03-05 17:26:17 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 17:52:19 start create.
+2024-03-05 17:53:19 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 17:55:19 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 17:55:19 finish delete.
+2024-03-05 17:56:19 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_1
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 18:26:04 start create.
+2024-03-05 18:27:04 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 18:29:04 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 18:29:04 finish delete.
+2024-03-05 18:30:04 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_2
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 18:41:04 start create.
+2024-03-05 18:42:04 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 18:44:04 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 18:44:04 finish delete.
+2024-03-05 18:45:04 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 18:56:05 start create.
+2024-03-05 18:57:05 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 18:59:05 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 18:59:05 finish delete.
+2024-03-05 19:00:05 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 19:11:06 start create.
+2024-03-05 19:12:06 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 19:14:06 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 19:14:06 finish delete.
+2024-03-05 19:15:06 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_5
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 19:39:56 start create.
+2024-03-05 19:40:56 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 19:42:56 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 19:42:56 finish delete.
+2024-03-05 19:43:56 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 19:54:56 start create.
+2024-03-05 19:55:56 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 19:57:56 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 19:57:56 finish delete.
+2024-03-05 19:58:56 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 20:24:58 start create.
+2024-03-05 20:25:58 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 20:27:58 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 20:27:58 finish delete.
+2024-03-05 20:28:58 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 20:39:58 start create.
+2024-03-05 20:40:58 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 20:42:58 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 20:42:58 finish delete.
+2024-03-05 20:43:58 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_mem_load_10
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-05 20:54:59 start create.
+2024-03-05 20:55:59 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 20:57:59 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-05 20:57:59 finish delete.
+2024-03-05 20:58:59 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 21:10:00 start create.
+2024-03-05 21:11:00 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 21:13:00 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 21:13:00 finish delete.
+2024-03-05 21:14:00 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 21:25:00 start create.
+2024-03-05 21:26:00 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 21:28:00 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 21:28:00 finish delete.
+2024-03-05 21:29:00 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 21:40:01 start create.
+2024-03-05 21:41:01 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 21:43:01 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 21:43:01 finish delete.
+2024-03-05 21:44:01 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 21:55:02 start create.
+2024-03-05 21:56:02 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 21:58:02 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 21:58:02 finish delete.
+2024-03-05 21:59:02 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 22:10:02 start create.
+2024-03-05 22:11:02 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 22:13:02 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 22:13:03 finish delete.
+2024-03-05 22:14:03 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 22:25:03 start create.
+2024-03-05 22:26:03 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 22:28:03 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 22:28:03 finish delete.
+2024-03-05 22:29:03 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 22:40:04 start create.
+2024-03-05 22:41:04 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 22:43:04 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 22:43:04 finish delete.
+2024-03-05 22:44:04 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 22:55:04 start create.
+2024-03-05 22:56:04 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 22:58:04 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 22:58:05 finish delete.
+2024-03-05 22:59:05 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 23:10:05 start create.
+2024-03-05 23:11:05 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 23:13:05 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 23:13:05 finish delete.
+2024-03-05 23:14:05 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+details_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-05 23:28:25 start create.
+2024-03-05 23:29:25 start scale up 1.
+deployment.apps/details-v1 scaled
+2024-03-05 23:31:25 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-05 23:31:25 finish delete.
+2024-03-05 23:32:25 start scale down 1.
+deployment.apps/details-v1 scaled
+
+
+productpage_cpu_load_1
+stresschaos.chaos-mesh.org/cpu created
+2024-03-05 23:51:07 start create.
+2024-03-05 23:52:07 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-05 23:54:07 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-05 23:54:07 finish delete.
+2024-03-05 23:55:07 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 00:06:07 start create.
+2024-03-06 00:07:07 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 00:09:07 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 00:09:08 finish delete.
+2024-03-06 00:10:08 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 00:21:08 start create.
+2024-03-06 00:22:08 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 00:24:08 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 00:24:08 finish delete.
+2024-03-06 00:25:08 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 00:36:09 start create.
+2024-03-06 00:37:09 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 00:39:09 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 00:39:09 finish delete.
+2024-03-06 00:40:09 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 00:51:10 start create.
+2024-03-06 00:52:10 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 00:54:10 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 00:54:10 finish delete.
+2024-03-06 00:55:10 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+productpage_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 01:06:10 start create.
+2024-03-06 01:07:10 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 01:09:11 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 01:09:11 finish delete.
+2024-03-06 01:10:11 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 01:21:11 start create.
+2024-03-06 01:22:11 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 01:24:11 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 01:24:11 finish delete.
+2024-03-06 01:25:11 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 01:36:12 start create.
+2024-03-06 01:37:12 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 01:39:12 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 01:39:12 finish delete.
+2024-03-06 01:40:12 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_9
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 01:51:12 start create.
+2024-03-06 01:52:12 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 01:54:13 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 01:54:13 finish delete.
+2024-03-06 01:55:13 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 02:06:13 start create.
+2024-03-06 02:07:13 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 02:09:13 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 02:09:13 finish delete.
+2024-03-06 02:10:13 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+productpage_mem_load_1
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 08:44:47 start create.
+2024-03-11 08:45:47 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 08:47:47 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 08:47:47 finish delete.
+2024-03-11 08:48:47 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_2
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 08:59:47 start create.
+2024-03-11 09:00:47 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 09:02:47 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 09:02:47 finish delete.
+2024-03-11 09:03:47 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 09:14:48 start create.
+2024-03-11 09:15:48 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 09:17:48 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 09:17:48 finish delete.
+2024-03-11 09:18:48 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 09:29:49 start create.
+2024-03-11 09:30:49 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 09:32:49 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 09:32:49 finish delete.
+2024-03-11 09:33:49 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_5
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 09:44:49 start create.
+2024-03-11 09:45:49 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 09:47:49 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 09:47:49 finish delete.
+2024-03-11 09:48:49 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 09:59:50 start create.
+2024-03-11 10:00:50 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 10:02:50 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 10:02:50 finish delete.
+2024-03-11 10:03:50 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_7
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 10:14:50 start create.
+2024-03-11 10:15:50 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 10:17:50 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 10:17:50 finish delete.
+2024-03-11 10:18:50 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 10:29:51 start create.
+2024-03-11 10:30:51 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 10:32:51 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 10:32:51 finish delete.
+2024-03-11 10:33:51 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 10:44:52 start create.
+2024-03-11 10:45:52 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 10:47:52 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 10:47:52 finish delete.
+2024-03-11 10:48:52 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_10
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 10:59:52 start create.
+2024-03-11 11:00:52 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 11:02:52 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 11:02:52 finish delete.
+2024-03-11 11:03:52 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_11
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 02:21:14 start create.
+2024-03-06 02:22:14 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 02:24:14 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 02:24:14 finish delete.
+2024-03-06 02:25:14 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_12
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 02:36:15 start create.
+2024-03-06 02:37:15 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 02:39:15 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 02:39:15 finish delete.
+2024-03-06 02:40:15 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_13
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 02:51:15 start create.
+2024-03-06 02:52:15 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 02:54:15 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 02:54:16 finish delete.
+2024-03-06 02:55:16 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_mem_load_14
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 03:06:16 start create.
+2024-03-06 03:07:16 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-06 03:09:16 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 03:09:16 finish delete.
+2024-03-06 03:10:16 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 11:14:53 start create.
+2024-03-11 11:15:53 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 11:17:53 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 11:17:53 finish delete.
+2024-03-11 11:18:53 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 11:29:53 start create.
+2024-03-11 11:30:53 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 11:32:53 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 11:32:53 finish delete.
+2024-03-11 11:33:53 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 11:44:54 start create.
+2024-03-11 11:45:54 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 11:47:54 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 11:47:54 finish delete.
+2024-03-11 11:48:54 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 11:59:55 start create.
+2024-03-11 12:00:55 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 12:02:55 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 12:02:55 finish delete.
+2024-03-11 12:03:55 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 12:14:55 start create.
+2024-03-11 12:15:55 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 12:17:55 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 12:17:55 finish delete.
+2024-03-11 12:18:55 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 12:29:56 start create.
+2024-03-11 12:30:56 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 12:32:56 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 12:32:56 finish delete.
+2024-03-11 12:33:56 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 12:44:56 start create.
+2024-03-11 12:45:56 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 12:47:56 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 12:47:57 finish delete.
+2024-03-11 12:48:57 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 12:59:57 start create.
+2024-03-11 13:00:57 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 13:02:57 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 13:02:57 finish delete.
+2024-03-11 13:03:57 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 13:14:57 start create.
+2024-03-11 13:15:57 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 13:17:58 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 13:17:58 finish delete.
+2024-03-11 13:18:58 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+productpage_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-11 13:29:58 start create.
+2024-03-11 13:30:58 start scale up 1.
+deployment.apps/productpage-v1 scaled
+2024-03-11 13:32:58 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-11 13:32:58 finish delete.
+2024-03-11 13:33:58 start scale down 1.
+deployment.apps/productpage-v1 scaled
+
+
+ratings_cpu_load_1
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 20:03:45 start create.
+2024-03-11 20:04:45 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 20:06:45 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 20:06:45 finish delete.
+2024-03-11 20:07:45 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 20:18:45 start create.
+2024-03-11 20:19:45 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 20:21:45 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 20:21:46 finish delete.
+2024-03-11 20:22:46 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 20:33:46 start create.
+2024-03-11 20:34:46 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 20:36:46 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 20:36:46 finish delete.
+2024-03-11 20:37:46 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 20:48:47 start create.
+2024-03-11 20:49:47 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 20:51:47 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 20:51:47 finish delete.
+2024-03-11 20:52:47 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 21:03:47 start create.
+2024-03-11 21:04:47 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 21:06:47 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 21:06:47 finish delete.
+2024-03-11 21:07:47 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 21:18:48 start create.
+2024-03-11 21:19:48 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 21:21:48 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 21:21:48 finish delete.
+2024-03-11 21:22:48 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 13:45:00 start create.
+2024-03-11 13:46:00 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 13:48:01 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 13:48:01 finish delete.
+2024-03-11 13:49:01 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 14:00:01 start create.
+2024-03-11 14:01:01 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 14:03:01 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 14:03:01 finish delete.
+2024-03-11 14:04:01 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_9
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 15:45:14 start create.
+2024-03-11 15:46:15 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 15:48:15 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 15:48:15 finish delete.
+2024-03-11 15:49:15 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-11 16:00:15 start create.
+2024-03-11 16:01:15 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-11 16:03:15 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-11 16:03:16 finish delete.
+2024-03-11 16:04:16 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_cpu_load_11
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 09:36:34 start create.
+2024-03-06 09:37:34 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 09:39:34 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 09:39:34 finish delete.
+2024-03-06 09:40:34 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_1
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 09:51:35 start create.
+2024-03-06 09:52:35 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 09:54:35 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 09:54:35 finish delete.
+2024-03-06 09:55:35 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_2
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 10:06:35 start create.
+2024-03-06 10:07:35 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 10:09:35 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 10:09:35 finish delete.
+2024-03-06 10:10:35 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 10:21:36 start create.
+2024-03-06 10:22:36 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 10:24:36 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 10:24:36 finish delete.
+2024-03-06 10:25:36 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 10:36:36 start create.
+2024-03-06 10:37:36 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 10:39:37 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 10:39:37 finish delete.
+2024-03-06 10:40:37 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_5
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 10:51:37 start create.
+2024-03-06 10:52:37 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 10:54:37 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 10:54:37 finish delete.
+2024-03-06 10:55:37 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 11:06:38 start create.
+2024-03-06 11:07:38 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 11:09:38 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 11:09:38 finish delete.
+2024-03-06 11:10:38 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_7
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 11:21:38 start create.
+2024-03-06 11:22:38 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 11:24:38 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 11:24:39 finish delete.
+2024-03-06 11:25:39 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 11:36:39 start create.
+2024-03-06 11:37:39 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 11:39:39 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 11:39:39 finish delete.
+2024-03-06 11:40:39 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 11:51:40 start create.
+2024-03-06 11:52:40 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 11:54:40 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 11:54:40 finish delete.
+2024-03-06 11:55:40 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_mem_load_10
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 12:06:40 start create.
+2024-03-06 12:07:40 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 12:09:40 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 12:09:40 finish delete.
+2024-03-06 12:10:40 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 12:21:41 start create.
+2024-03-06 12:22:41 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 12:24:41 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 12:24:41 finish delete.
+2024-03-06 12:25:41 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 12:36:41 start create.
+2024-03-06 12:37:41 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 12:39:42 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 12:39:42 finish delete.
+2024-03-06 12:40:42 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 12:51:42 start create.
+2024-03-06 12:52:42 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 12:54:42 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 12:54:42 finish delete.
+2024-03-06 12:55:42 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 13:06:43 start create.
+2024-03-06 13:07:43 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 13:09:43 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 13:09:43 finish delete.
+2024-03-06 13:10:43 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 13:21:43 start create.
+2024-03-06 13:22:43 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 13:24:43 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 13:24:43 finish delete.
+2024-03-06 13:25:43 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 13:36:44 start create.
+2024-03-06 13:37:44 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 13:39:44 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 13:39:44 finish delete.
+2024-03-06 13:40:44 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 13:51:45 start create.
+2024-03-06 13:52:45 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 13:54:45 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 13:54:45 finish delete.
+2024-03-06 13:55:45 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 14:06:45 start create.
+2024-03-06 14:07:45 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 14:09:45 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 14:09:45 finish delete.
+2024-03-06 14:10:45 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 14:21:46 start create.
+2024-03-06 14:22:46 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 14:24:46 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 14:24:46 finish delete.
+2024-03-06 14:25:46 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+ratings_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 14:36:47 start create.
+2024-03-06 14:37:47 start scale up 1.
+deployment.apps/ratings-v1 scaled
+2024-03-06 14:39:47 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-06 14:39:47 finish delete.
+2024-03-06 14:40:47 start scale down 1.
+deployment.apps/ratings-v1 scaled
+
+
+reviews-v1_cpu_load_1
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 14:51:47 start create.
+2024-03-06 14:52:47 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 14:54:47 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 14:54:47 finish delete.
+2024-03-06 14:55:47 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 15:06:48 start create.
+2024-03-06 15:07:48 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 15:09:48 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 15:09:48 finish delete.
+2024-03-06 15:10:48 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 15:21:49 start create.
+2024-03-06 15:22:49 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 15:24:49 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 15:24:49 finish delete.
+2024-03-06 15:25:49 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 15:36:49 start create.
+2024-03-06 15:37:49 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 15:39:49 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 15:39:49 finish delete.
+2024-03-06 15:40:49 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 15:51:50 start create.
+2024-03-06 15:52:50 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 15:54:50 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 15:54:50 finish delete.
+2024-03-06 15:55:50 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 16:06:50 start create.
+2024-03-06 16:07:50 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 16:09:51 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 16:09:51 finish delete.
+2024-03-06 16:10:51 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 16:21:51 start create.
+2024-03-06 16:22:51 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 16:24:51 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 16:24:51 finish delete.
+2024-03-06 16:25:51 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 16:36:52 start create.
+2024-03-06 16:37:52 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 16:39:52 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 16:39:52 finish delete.
+2024-03-06 16:40:52 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_9
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 16:51:52 start create.
+2024-03-06 16:52:52 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 16:54:52 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 16:54:53 finish delete.
+2024-03-06 16:55:53 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-06 17:06:53 start create.
+2024-03-06 17:07:53 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 17:09:53 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-06 17:09:53 finish delete.
+2024-03-06 17:10:53 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_1
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 17:21:54 start create.
+2024-03-06 17:22:54 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 17:24:54 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 17:24:54 finish delete.
+2024-03-06 17:25:54 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 17:51:55 start create.
+2024-03-06 17:52:55 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 17:54:55 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 17:54:55 finish delete.
+2024-03-06 17:55:55 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 18:06:56 start create.
+2024-03-06 18:07:56 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 18:09:56 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 18:09:56 finish delete.
+2024-03-06 18:10:56 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_5
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 18:21:56 start create.
+2024-03-06 18:22:56 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 18:24:56 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 18:24:56 finish delete.
+2024-03-06 18:25:56 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 18:36:57 start create.
+2024-03-06 18:37:57 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 18:39:57 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 18:39:57 finish delete.
+2024-03-06 18:40:57 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_7
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 22:33:32 start create.
+2024-03-06 22:34:32 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 22:36:32 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 22:36:32 finish delete.
+2024-03-06 22:37:32 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 22:48:33 start create.
+2024-03-06 22:49:33 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 22:51:33 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 22:51:33 finish delete.
+2024-03-06 22:52:33 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-06 23:03:33 start create.
+2024-03-06 23:04:33 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-06 23:06:33 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-06 23:06:34 finish delete.
+2024-03-06 23:07:34 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-06 23:58:12 start create.
+2024-03-06 23:59:12 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 00:01:12 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 00:01:12 finish delete.
+2024-03-07 00:02:12 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 00:13:12 start create.
+2024-03-07 00:14:12 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 00:16:13 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 00:16:13 finish delete.
+2024-03-07 00:17:13 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 00:28:13 start create.
+2024-03-07 00:29:13 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 00:31:13 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 00:31:13 finish delete.
+2024-03-07 00:32:13 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 00:43:14 start create.
+2024-03-07 00:44:14 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 00:46:14 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 00:46:14 finish delete.
+2024-03-07 00:47:14 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 00:58:14 start create.
+2024-03-07 00:59:14 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 01:01:14 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 01:01:14 finish delete.
+2024-03-07 01:02:14 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 01:13:15 start create.
+2024-03-07 01:14:15 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 01:16:15 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 01:16:15 finish delete.
+2024-03-07 01:17:15 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 01:28:15 start create.
+2024-03-07 01:29:15 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 01:31:16 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 01:31:16 finish delete.
+2024-03-07 01:32:16 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 01:43:16 start create.
+2024-03-07 01:44:16 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 01:46:16 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 01:46:16 finish delete.
+2024-03-07 01:47:16 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 01:58:17 start create.
+2024-03-07 01:59:17 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 02:01:17 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 02:01:17 finish delete.
+2024-03-07 02:02:17 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v1_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 02:13:17 start create.
+2024-03-07 02:14:17 start scale up 1.
+deployment.apps/reviews-v1 scaled
+2024-03-07 02:16:17 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 02:16:17 finish delete.
+2024-03-07 02:17:17 start scale down 1.
+deployment.apps/reviews-v1 scaled
+
+
+reviews-v2_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 12:50:11 start create.
+2024-03-07 12:51:11 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 12:53:11 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 12:53:11 finish delete.
+2024-03-07 12:54:11 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 13:05:12 start create.
+2024-03-07 13:06:12 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 13:08:12 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 13:08:12 finish delete.
+2024-03-07 13:09:12 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 13:20:12 start create.
+2024-03-07 13:21:12 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 13:23:12 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 13:23:13 finish delete.
+2024-03-07 13:24:13 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 13:35:13 start create.
+2024-03-07 13:36:13 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 13:38:13 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 13:38:13 finish delete.
+2024-03-07 13:39:13 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 13:50:14 start create.
+2024-03-07 13:51:14 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 13:53:14 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 13:53:14 finish delete.
+2024-03-07 13:54:14 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 14:05:16 start create.
+2024-03-07 14:06:16 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 14:08:16 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 14:08:16 finish delete.
+2024-03-07 14:09:16 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 14:20:16 start create.
+2024-03-07 14:21:16 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 14:23:16 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 14:23:16 finish delete.
+2024-03-07 14:24:16 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_9
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 14:35:17 start create.
+2024-03-07 14:36:17 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 14:38:17 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 14:38:17 finish delete.
+2024-03-07 14:39:17 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 14:50:17 start create.
+2024-03-07 14:51:17 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 14:53:17 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 14:53:17 finish delete.
+2024-03-07 14:54:17 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_cpu_load_11
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 15:05:18 start create.
+2024-03-07 15:06:18 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 15:08:18 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 15:08:18 finish delete.
+2024-03-07 15:09:18 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 22:03:50 start create.
+2024-03-11 22:04:50 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 22:06:50 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 22:06:50 finish delete.
+2024-03-11 22:07:50 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 22:18:50 start create.
+2024-03-11 22:19:50 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 22:21:51 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 22:21:51 finish delete.
+2024-03-11 22:22:51 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 22:48:52 start create.
+2024-03-11 22:49:52 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 22:51:52 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 22:51:52 finish delete.
+2024-03-11 22:52:52 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_7
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 16:15:16 start create.
+2024-03-11 16:16:16 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 16:18:16 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 16:18:16 finish delete.
+2024-03-11 16:19:16 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 16:30:17 start create.
+2024-03-11 16:31:17 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 16:33:17 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 16:33:17 finish delete.
+2024-03-11 16:34:17 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 16:45:18 start create.
+2024-03-11 16:46:18 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 16:48:18 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 16:48:18 finish delete.
+2024-03-11 16:49:18 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_10
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 17:00:18 start create.
+2024-03-11 17:01:18 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-11 17:03:19 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 17:03:19 finish delete.
+2024-03-11 17:04:19 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_11
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-07 15:35:19 start create.
+2024-03-07 15:36:19 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 15:38:19 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-07 15:38:19 finish delete.
+2024-03-07 15:39:19 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_12
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-07 15:50:20 start create.
+2024-03-07 15:51:20 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 15:53:20 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-07 15:53:20 finish delete.
+2024-03-07 15:54:20 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_mem_load_13
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-07 17:35:24 start create.
+2024-03-07 17:36:24 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 17:38:24 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-07 17:38:24 finish delete.
+2024-03-07 17:39:24 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 17:50:25 start create.
+2024-03-07 17:51:25 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 17:53:25 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 17:53:25 finish delete.
+2024-03-07 17:54:25 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 18:05:25 start create.
+2024-03-07 18:06:25 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 18:08:25 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 18:08:25 finish delete.
+2024-03-07 18:09:25 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 18:20:26 start create.
+2024-03-07 18:21:26 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 18:23:26 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 18:23:26 finish delete.
+2024-03-07 18:24:26 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 18:35:26 start create.
+2024-03-07 18:36:27 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 18:38:27 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 18:38:27 finish delete.
+2024-03-07 18:39:27 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 18:50:27 start create.
+2024-03-07 18:51:27 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 18:53:27 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 18:53:27 finish delete.
+2024-03-07 18:54:27 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 19:05:28 start create.
+2024-03-07 19:06:28 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 19:08:28 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 19:08:28 finish delete.
+2024-03-07 19:09:28 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 19:20:28 start create.
+2024-03-07 19:21:28 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 19:23:28 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 19:23:28 finish delete.
+2024-03-07 19:24:28 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 19:35:29 start create.
+2024-03-07 19:36:29 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 19:38:29 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 19:38:29 finish delete.
+2024-03-07 19:39:29 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 19:50:30 start create.
+2024-03-07 19:51:30 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 19:53:30 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 19:53:30 finish delete.
+2024-03-07 19:54:30 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v2_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-07 20:05:30 start create.
+2024-03-07 20:06:30 start scale up 1.
+deployment.apps/reviews-v2 scaled
+2024-03-07 20:08:30 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-07 20:08:30 finish delete.
+2024-03-07 20:09:30 start scale down 1.
+deployment.apps/reviews-v2 scaled
+
+
+reviews-v3_cpu_load_1
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 20:20:31 start create.
+2024-03-07 20:21:31 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 20:23:31 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 20:23:31 finish delete.
+2024-03-07 20:24:31 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_2
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 20:35:31 start create.
+2024-03-07 20:36:31 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 20:38:31 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 20:38:32 finish delete.
+2024-03-07 20:39:32 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_3
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 20:50:32 start create.
+2024-03-07 20:51:32 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 20:53:32 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 20:53:32 finish delete.
+2024-03-07 20:54:32 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_4
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 21:05:33 start create.
+2024-03-07 21:06:33 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 21:08:33 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 21:08:33 finish delete.
+2024-03-07 21:09:33 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_5
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 21:20:33 start create.
+2024-03-07 21:21:33 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 21:23:33 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 21:23:33 finish delete.
+2024-03-07 21:24:33 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_6
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 21:35:34 start create.
+2024-03-07 21:36:34 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 21:38:34 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 21:38:34 finish delete.
+2024-03-07 21:39:34 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_7
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 21:50:34 start create.
+2024-03-07 21:51:34 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 21:53:34 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 21:53:34 finish delete.
+2024-03-07 21:54:34 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_8
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 22:05:35 start create.
+2024-03-07 22:06:35 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 22:08:35 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 22:08:35 finish delete.
+2024-03-07 22:09:35 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_9
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 22:20:36 start create.
+2024-03-07 22:21:36 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 22:23:36 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 22:23:36 finish delete.
+2024-03-07 22:24:36 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_cpu_load_10
+stresschaos.chaos-mesh.org/cpu created
+2024-03-07 22:35:36 start create.
+2024-03-07 22:36:36 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 22:38:36 start delete.
+stresschaos.chaos-mesh.org "cpu" deleted
+2024-03-07 22:38:36 finish delete.
+2024-03-07 22:39:36 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_1
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 17:25:33 start create.
+2024-03-11 17:26:33 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 17:28:33 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 17:28:33 finish delete.
+2024-03-11 17:29:33 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_2
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 17:40:34 start create.
+2024-03-11 17:41:34 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 17:43:34 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 17:43:34 finish delete.
+2024-03-11 17:44:34 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_3
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 17:55:34 start create.
+2024-03-11 17:56:34 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 17:58:35 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 17:58:35 finish delete.
+2024-03-11 17:59:35 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_4
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 18:10:35 start create.
+2024-03-11 18:11:35 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 18:13:35 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 18:13:35 finish delete.
+2024-03-11 18:14:35 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_5
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 18:25:36 start create.
+2024-03-11 18:26:36 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 18:28:36 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 18:28:36 finish delete.
+2024-03-11 18:29:36 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_6
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 18:40:36 start create.
+2024-03-11 18:41:36 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 18:43:36 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 18:43:36 finish delete.
+2024-03-11 18:44:36 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_7
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 18:55:37 start create.
+2024-03-11 18:56:37 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 18:58:37 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 18:58:37 finish delete.
+2024-03-11 18:59:37 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_8
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 19:10:38 start create.
+2024-03-11 19:11:38 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 19:13:38 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 19:13:38 finish delete.
+2024-03-11 19:14:38 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_9
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 19:25:38 start create.
+2024-03-11 19:26:38 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 19:28:38 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 19:28:38 finish delete.
+2024-03-11 19:29:38 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_10
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-11 19:40:39 start create.
+2024-03-11 19:41:39 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-11 19:43:39 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-11 19:43:39 finish delete.
+2024-03-11 19:44:39 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_11
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-07 22:50:37 start create.
+2024-03-07 22:51:37 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 22:53:37 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-07 22:53:37 finish delete.
+2024-03-07 22:54:37 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_12
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-07 23:05:37 start create.
+2024-03-07 23:06:37 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-07 23:08:37 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-07 23:08:38 finish delete.
+2024-03-07 23:09:38 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_mem_load_13
+stresschaos.chaos-mesh.org/memory-3 created
+2024-03-08 01:05:42 start create.
+2024-03-08 01:06:42 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 01:08:42 start delete.
+stresschaos.chaos-mesh.org "memory-3" deleted
+2024-03-08 01:08:42 finish delete.
+2024-03-08 01:09:42 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_1
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 01:20:43 start create.
+2024-03-08 01:21:43 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 01:23:43 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 01:23:43 finish delete.
+2024-03-08 01:24:43 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_2
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 01:35:43 start create.
+2024-03-08 01:36:43 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 01:38:43 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 01:38:43 finish delete.
+2024-03-08 01:39:43 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_3
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 01:50:44 start create.
+2024-03-08 01:51:44 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 01:53:44 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 01:53:44 finish delete.
+2024-03-08 01:54:44 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_4
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 02:05:45 start create.
+2024-03-08 02:06:45 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 02:08:45 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 02:08:45 finish delete.
+2024-03-08 02:09:45 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_5
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 02:20:45 start create.
+2024-03-08 02:21:45 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 02:23:45 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 02:23:45 finish delete.
+2024-03-08 02:24:45 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_6
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 02:35:46 start create.
+2024-03-08 02:36:46 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 02:38:46 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 02:38:46 finish delete.
+2024-03-08 02:39:46 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_7
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 02:50:46 start create.
+2024-03-08 02:51:46 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 02:53:46 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 02:53:46 finish delete.
+2024-03-08 02:54:46 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_8
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 03:05:47 start create.
+2024-03-08 03:06:47 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 03:08:47 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 03:08:47 finish delete.
+2024-03-08 03:09:47 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_9
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 03:20:47 start create.
+2024-03-08 03:21:47 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 03:23:48 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 03:23:48 finish delete.
+2024-03-08 03:24:48 start scale down 1.
+deployment.apps/reviews-v3 scaled
+
+
+reviews-v3_net_latency_10
+networkchaos.chaos-mesh.org/delay-2 created
+2024-03-08 03:35:48 start create.
+2024-03-08 03:36:48 start scale up 1.
+deployment.apps/reviews-v3 scaled
+2024-03-08 03:38:48 start delete.
+networkchaos.chaos-mesh.org "delay-2" deleted
+2024-03-08 03:38:48 finish delete.
+2024-03-08 03:39:48 start scale down 1.
+deployment.apps/reviews-v3 scaled
