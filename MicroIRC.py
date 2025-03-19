@@ -4,8 +4,8 @@
 @author: zhuyuhan2333
 """
 
-from os import error
-import time
+import pytz
+from datetime import datetime
 import pandas as pd
 import numpy as np
 import networkx as nx
@@ -15,10 +15,8 @@ import random
 from sklearn.cluster import Birch
 from sklearn import preprocessing
 
-from utils.PageRank import pageRank
 from metric_sage.model import run_RCA
 from metric_sage.time import Time
-import torch
 
 from util import formalize
 from metric_sage.Config import Config
@@ -762,11 +760,13 @@ if __name__ == '__main__':
         time_list = []
 
         j = 0
+        shanghai_tz = pytz.timezone("Asia/Shanghai")
         for row in label_data.itertuples():
             root_cause = row[3]
             root_cause_level = row[2]
             real_time = data_list[i] + row[1]
-            real_timestamp = int(time.mktime(time.strptime(real_time, "%Y-%m-%d %H:%M:%S")))
+            dt = shanghai_tz.localize(datetime.strptime(real_time, "%Y-%m-%d %H:%M:%S"))
+            real_timestamp = int(dt.timestamp())
             begin_timestamp = real_timestamp - 30 * minute
             end_timestamp = real_timestamp + 30 * minute
             failure_type = row[4]
